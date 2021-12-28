@@ -1,5 +1,5 @@
 // in der einzelnen _Schrift-Datei im ordner fonts wird per @font-face definiert
-$fa-font-path: '../fonts';
+$fa-font-path: '../../public/fonts';
 
 @import 'fa';
 @import 'roboto-v29-latin';
