@@ -1,11 +1,11 @@
 import React from 'react';
 // import HookExample from './components/UseStateEx';
-import EffectExample from './components/useEffectEx';
+import EffectHookExample from './components/useEffectEx';
 
 function App() {
   return (
     <>
-      <EffectExample></EffectExample>
+      <EffectHookExample></EffectHookExample>
     </>
   )
 

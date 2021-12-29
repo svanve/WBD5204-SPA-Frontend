@@ -13,12 +13,11 @@ const UseEffectEx = (props) => {
             .then(json => setItems(json.moves));
     }, [resourceType]);
 
-
     return (
     <>
         <div>
-            <button onClick={() => {setResourceType('charizard')}}>Names</button>
-            <button onClick={() => {setResourceType('100')}}>Id's</button>
+            <button onClick={() => {setResourceType('charizard')}}>Charizard</button>
+            <button onClick={() => {setResourceType('voltorb')}}>Voltoball</button>
         </div>
         <h1>Pokemon: {resourceType}</h1>
         {items.map(item => {
