@@ -1,0 +1,15 @@
+.footer-wrapper {
+    background-color: $black;
+    footer { 
+        ul {
+            padding: 30px;
+            a {
+                color: $highlight;
+                display: inline-block;
+                width: 100%;
+            }
+        }
+        
+
+    } 
+}
