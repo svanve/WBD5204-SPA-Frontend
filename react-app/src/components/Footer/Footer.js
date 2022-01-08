@@ -18,7 +18,7 @@ const Footer = (props) => {
                     <Link to='/'>Contact</Link>
                 </li>
                 </ul>
-                <div>Copyright &copy; 2022</div>
+                <div className="copyright">Copyright &copy; 2022</div>
             </footer>
         </div>
     </>

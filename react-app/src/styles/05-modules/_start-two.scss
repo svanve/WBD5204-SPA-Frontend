@@ -1,0 +1,13 @@
+#m-start-two {
+    background-color: $black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#ash-wrapper {
+    flex: 10 0 auto;
+}

@@ -1,13 +1,28 @@
-$primary: #2D8D77;
-$primary-hover: #5F8B81;
-$primary-click: #206656;
-$primary-disabled: #7E8D8A;
-$highlight: #44D7B6;
-
+$white: #fff;
 $black: #000;
 $lightgrey: #C0C0C0;
 $grey: #5F5F5F;
 $darkgrey: #383838;
+
+$primary: #2D8D77;
+$primary-hover: #5F8B81;
+$primary-click: #206656;
+$primary-disabled: #7E8D8A;
+
+$highlight: #44D7B6;
+$highlight-hover: #297e6b;
+
+$secondary: $grey;
+$secondary-hover: #707070;
+$secondary-click: #3d3d3d;
+$secondary-disabled: #a5a5a5;
+
+$bg-color: $black;
+$bg-color-in-app: $grey;
+$bg-card: $darkgrey;
+
+$headline-color: $white;
+$subheadline-color: $white;
 
 //also auch namen gut
 // $grey-light: ;

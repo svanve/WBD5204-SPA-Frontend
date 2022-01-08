@@ -3,13 +3,20 @@
     footer { 
         ul {
             padding: 30px;
-            a {
-                color: $highlight;
-                display: inline-block;
-                width: 100%;
+        }
+
+        a {
+            color: $lightgrey;
+            transition: color .25s ease-out;
+
+            &:hover {
+                color: $grey;
             }
         }
-        
+
+        .copyright {
+            padding-bottom: 30px;
+        }
 
     } 
 }

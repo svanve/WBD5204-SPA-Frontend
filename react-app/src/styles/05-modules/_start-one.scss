@@ -1,4 +1,66 @@
-.m-start-one {
+#m-start-one {
     background-color: $black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex: 1 0 auto;
+    margin-bottom: 0;
+
+    @include media-breakpoint-up(md) {
+        justify-content: start;
+    }
+}
+
+.start-container {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: center;
+    flex: 1 0 auto;
+    height: 60%;
+    width: 80%;
+}
+
+.usp-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.usp-row {
+    flex: 2 0 auto;
+    display: flex;
+    padding: .4rem 0;
+}
+
+.usp-icon {
+    display: flex;
+    padding-right: 10px;
+    align-items: center;
+}
+
+.usp-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+
+    .usp-paragraph {
+        color: $lightgrey;
+        margin: 0;
+    }
+
+    .usp-headline {
+        margin-bottom: .6rem;
+    }
 }
 

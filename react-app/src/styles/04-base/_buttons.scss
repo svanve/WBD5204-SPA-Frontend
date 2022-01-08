@@ -19,4 +19,64 @@
 //       color: $color-4;
 //     }
 //   }
-  
+
+.btn-primary {
+    background-color: $primary;
+    transition: all .25s ease-in-out;
+
+    &:hover {
+        background-color: $primary-hover;
+    }
+    
+    &:active {
+        background-color: $primary-hover;
+        box-shadow: 0 0 0 0.25rem $white;
+    }
+
+    &:focus {
+        background-color: $primary-click;
+        box-shadow: 0 0 0 0.25rem $highlight;
+    }
+}
+
+.btn-secondary {
+    background-color: $secondary;
+    transition: all .25s ease-in-out;
+
+    &:hover {
+        background-color: $secondary-hover;
+    }
+    
+    &:active {
+        background-color: $secondary-hover;
+        box-shadow: 0 0 0 0.25rem $white;
+    }
+
+    &:focus {
+        background-color: $secondary-click;
+        box-shadow: 0 0 0 0.25rem $highlight;
+    }
+}
+
+.btn-primary-blocked {
+    background-color: $primary-disabled;
+}
+
+.btn-secondary-blocked {
+    background-color: $secondary-disabled;
+}
+
+.btn-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 0;
+    flex: 1 0 auto;
+}
+
+.btn {
+    width: 100%;
+    height: 70px;
+    border: none;
+    font-size: $font-size-btn-cta;
+}

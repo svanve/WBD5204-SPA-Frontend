@@ -12,14 +12,19 @@ import './styles/main.scss';
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<StartOne />} />
 
-        <Route path="/start" element={<StartTwo />} />
-        <Route path="/login" />
-        <Route path="/register" />
-      </Routes>
-      <EffectHookExample></EffectHookExample>
+      <div className="content">
+        
+        <Routes>
+          <Route path="/" element={<StartOne />} />
+
+          <Route path="/start" element={<StartTwo />} />
+          <Route path="/login" />
+          <Route path="/register" />
+          <Route path="/useEffectHook" element={<EffectHookExample />}/>
+        </Routes>
+        
+      </div>
 
       <Footer></Footer>
       
