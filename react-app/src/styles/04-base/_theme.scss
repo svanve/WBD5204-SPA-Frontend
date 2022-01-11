@@ -79,3 +79,12 @@ a {
     }
 }
 
+.start-container {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: space-between;
+    flex: 1 0 auto;
+    height: 60%;
+    width: 90%;
+}
+

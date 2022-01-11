@@ -13,6 +13,8 @@ function App() {
   return (
     <Router>
 
+      {/* Hier kommt die Nav/Header rein */}
+
       <div className="content">
         
         <Routes>

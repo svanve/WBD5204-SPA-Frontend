@@ -6,6 +6,7 @@
     height: 100%;
     max-width: 1200px;
     margin: 0 auto;
+    padding: 4% 0;
 }
 
 h1 {
@@ -13,21 +14,11 @@ h1 {
     justify-content: center;
     align-items: center;
     text-align: center;
-    flex: 1 0 auto;
     margin-bottom: 0;
 
     @include media-breakpoint-up(md) {
         justify-content: start;
     }
-}
-
-.start-container {
-    display: inherit;
-    flex-direction: inherit;
-    justify-content: center;
-    flex: 1 0 auto;
-    height: 60%;
-    width: 80%;
 }
 
 .usp-wrapper {

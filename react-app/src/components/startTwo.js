@@ -1,5 +1,7 @@
 import React from 'react';
 
+import AshIcon from './IconComponents/AshIcon';
+
 const startTwo = (props) => {
     // const {} = props;
     return (
@@ -9,7 +11,7 @@ const startTwo = (props) => {
                 <h1>Let's play!</h1>
 
                 <div id="ash-wrapper">
-                    svg
+                    <AshIcon></AshIcon>
                 </div>
 
                 <div className="btn-wrapper">

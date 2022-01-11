@@ -1,8 +1,9 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import MewtoIcon from './iconComponents/MewtoIcon';
-import PokeballIcon from './iconComponents/PokeballIcon';
-import ProfEichIcon from './iconComponents/ProfEichIcon';
+import MewtoIcon from './IconComponents/MewtoIcon';
+import PokeballIcon from './IconComponents/PokeballIcon';
+import ProfEichIcon from './IconComponents/ProfEichIcon';
 
 const startOne = () => {
     // const {} = props;
@@ -45,9 +46,11 @@ const startOne = () => {
                 </div>
 
                 <div className="btn-wrapper">
-                <button className="btn btn-primary">
-                    Los geht's!
-                </button>
+                <NavLink to="/start">
+                    <button className="btn btn-primary">
+                        Los geht's!
+                    </button>
+                </NavLink>
             </div>
             </div>
             
