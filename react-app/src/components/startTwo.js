@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import AshIcon from './IconComponents/AshIcon';
 
@@ -15,13 +16,17 @@ const startTwo = (props) => {
                 </div>
 
                 <div className="btn-wrapper">
-                    <button className="btn btn-primary">
-                        Anmelden
-                    </button>
+                    <NavLink to="/login">
+                        <button className="btn btn-primary">
+                            Anmelden
+                        </button>
+                    </NavLink>
 
-                    <button className="btn btn-secondary my-3">
-                        Registrieren
-                    </button>
+                    <NavLink to="/register">
+                        <button className="btn btn-secondary my-3">
+                            Registrieren
+                        </button>
+                    </NavLink>
                 </div>
             </div>
             
