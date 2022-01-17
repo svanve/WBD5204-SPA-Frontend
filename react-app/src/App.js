@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import StartOne from './components/StartOne';
 import StartTwo from './components/StartTwo';
 import Login from './components/Login';
-import Register from './components/Register';
+import Register from './components/RegisterComponents/Register';
 
 import Footer from './components/Footer/Footer';
 // import HookExample from './components/UseStateEx';
@@ -18,7 +18,7 @@ function App() {
     <Router>
 
       {/* Hier kommt die Nav/Header rein */}
-
+      
       <div className="content">
         
         <Routes>
@@ -29,6 +29,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
 
+          {/* Just an exercise: */}
           <Route path="/useEffectHook" element={<EffectHookExample/>}/>
         </Routes>
         

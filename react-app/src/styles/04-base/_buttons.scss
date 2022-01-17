@@ -41,7 +41,7 @@
 
 .btn-secondary {
     background-color: $secondary;
-    transition: all .25s ease-in-out;
+    transition: $easing-in-out;
 
     &:hover {
         background-color: $secondary-hover;

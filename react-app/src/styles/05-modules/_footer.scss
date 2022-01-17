@@ -7,7 +7,7 @@
 
         a {
             color: $lightgrey;
-            transition: color .25s ease-out;
+            transition: $easing-out;
 
             &:hover {
                 color: $grey;
