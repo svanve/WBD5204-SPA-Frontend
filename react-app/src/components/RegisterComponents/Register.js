@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import BackIcon from '../IconComponents/BackIcon';
+import RegisterDropzone from './RegisterDropzone';
 
 const Register = (props) => {
     // const {} = props;
@@ -46,13 +47,9 @@ const Register = (props) => {
                         <label htmlFor="password-repeat">Passwort wiederholen</label>
                         <input type="password" className="form-control" id="password-repeat" name="password_repeat" placeholder="Password"/>
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="profile-pic">Profilbild hochladen</label>
-                        <input type="file" className="form-control" id="profile-pic" name="image" placeholder="Dein Profilbild"/>
-                    </div>
-                    <div className="profile-pic-container">
-                        
-                    </div>
+
+                    <RegisterDropzone></RegisterDropzone>
+                    
                     <div className="form-group form-check">
                         <input type="checkbox" className="form-check-input" id="agb"/>
                         <label className="form-check-label" htmlFor="agb">Ich habe die AGB gelesen und stimme ihnen zu.</label>
