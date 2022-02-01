@@ -18,7 +18,7 @@ const Register = (props) => {
                     <h1>Registrieren</h1>
                 </div>
                 
-                <form>
+                <form enctype="multipart/form-data">
                     <div className="form-group">
                         <label htmlFor="username">Vorname</label>
                         <input type="text" className="form-control" id="username" name="firstname" aria-describedby="firstNameHelp" placeholder="Dein Vorname"/>
@@ -41,11 +41,11 @@ const Register = (props) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Passwort</label>
-                        <input type="password" className="form-control" id="password" name="password" placeholder="Password"/>
+                        <input type="password" className="form-control" id="password" name="password" placeholder="Passwort"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password-repeat">Passwort wiederholen</label>
-                        <input type="password" className="form-control" id="password-repeat" name="password_repeat" placeholder="Password"/>
+                        <input type="password" className="form-control" id="password-repeat" name="password_repeat" placeholder="Passwort"/>
                     </div>
 
                     <RegisterDropzone></RegisterDropzone>

@@ -39,6 +39,10 @@
     padding-left: 1%;
     display: flex;
     align-items: center;
+
+    label {
+        cursor: pointer;
+    }
 }
 
 #agb {
