@@ -35,7 +35,7 @@ p {
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
+h1, .h1 {
   font-family: $font-headline;
   font-size: $font-size-headline;
   margin-bottom: 1.5rem;

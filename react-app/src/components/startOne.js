@@ -7,11 +7,12 @@ import ProfEichIcon from './IconComponents/ProfEichIcon';
 
 const startOne = () => {
     // const {} = props;
+
     return (
     <>
         <div id="m-start-one" >
             <div className='container start-container'>
-                <h1>Let's get started</h1>
+                <p className='h1'>Let's get started</p>
 
                 <div className="usp-wrapper">
                 <div className="usp-row row">

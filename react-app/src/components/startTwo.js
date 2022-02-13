@@ -9,7 +9,7 @@ const startTwo = (props) => {
     <>
         <div id="m-start-two" >
             <div className='container start-container'>
-                <h1>Let's play!</h1>
+                <p className='h1'>Let's play!</p>
 
                 <div id="ash-wrapper">
                     <AshIcon></AshIcon>

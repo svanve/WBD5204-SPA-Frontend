@@ -13,7 +13,7 @@ const Login = (props) => {
                         <NavLink to="/start" className="back-icon-div">
                                 <BackIcon className="back-icon"></BackIcon>
                         </NavLink>
-                        <h1>Login</h1>
+                        <p className='h1'>Login</p>
                     </div>
                     
                     <form enctype="multipart/form-data">

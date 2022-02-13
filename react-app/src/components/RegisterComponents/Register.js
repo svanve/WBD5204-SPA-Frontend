@@ -20,7 +20,7 @@ const Register = (props) => {
                     <NavLink to="/start" className="back-icon-div">
                             <BackIcon className="back-icon"></BackIcon>
                     </NavLink>
-                    <h1>Registrieren</h1>
+                    <p className='h1'>Registrieren</p>
                 </div>
                 
                 <form enctype="multipart/form-data">
