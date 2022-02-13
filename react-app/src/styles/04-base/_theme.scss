@@ -79,12 +79,18 @@ a {
     }
 }
 
+input {
+    height: 62px;
+    font-size: 18px;
+}
+
 .start-container {
+    min-height: inherit;
     display: inherit;
     flex-direction: inherit;
     justify-content: space-between;
     flex: 1 0 auto;
-    height: 60%;
+
     width: 90%;
 }
 

@@ -6,6 +6,11 @@ import RegisterDropzone from './RegisterDropzone';
 
 const Register = (props) => {
     // const {} = props;
+
+    // 1) append FormData from alll but Dropzone
+    //
+    // 2) submit formData
+
     return (
     <>
         <div id="m-register" >
@@ -20,8 +25,8 @@ const Register = (props) => {
                 
                 <form enctype="multipart/form-data">
                     <div className="form-group">
-                        <label htmlFor="username">Vorname</label>
-                        <input type="text" className="form-control" id="username" name="firstname" aria-describedby="firstNameHelp" placeholder="Dein Vorname"/>
+                        <label htmlFor="prename">Vorname</label>
+                        <input type="text" className="form-control" id="prename" name="firstname" aria-describedby="firstNameHelp" placeholder="Dein Vorname"/>
                         <small id="firstNameHelp" className="form-text text-muted">Gib deinen Vornamen ein.</small>
                     </div>
                     <div className="form-group">

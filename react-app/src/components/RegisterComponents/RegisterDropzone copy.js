@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {useDropzone} from 'react-dropzone';
-import Thumbnail from './Thumbnail.js';
 // import { useLinkClickHandler } from 'react-router-dom';
 
 const RegisterDropzone = () => {
-
-    // config file?
-    const maxsize = 1000000;
 
     const [file, setFile] = useState([]);
     const {getRootProps, getInputProps, isDragActive} = useDropzone({
@@ -14,10 +10,18 @@ const RegisterDropzone = () => {
         onDrop: acceptedFiles => {
             setFile( Object.assign(
                 acceptedFiles[0], 
-                { preview: URL.createObjectURL(acceptedFiles[0]) }
+                { preview: URL.createObjectURL(acceptedFiles[0])}
             ));
         }
     });
+    
+    const thumb =   <div className='preview-outter-container' key={file.name}>
+                        <img
+                            src={file.preview}
+                            className='preview-img'
+                            alt=''
+                        />
+                    </div>;
     
     useEffect(() => {
         // Make sure to revoke the data uris to avoid memory leaks
@@ -25,45 +29,25 @@ const RegisterDropzone = () => {
     }, [file]);
 
     // append Data to formData object
-    let formData = new FormData();
-    const [ data, setData ] = useState( {} );
+    let initialData = { image: '' };
+    const [ data, setData ] = useState( initialData );
 
     function handle( e ) {
         const newData = { ...data};
-        newData[ e.target.name ] = e.target.value;
+        console.log(data.value);
+        newData[ e.target.id ] = data.value;
         setData( newData );
-
-        formData.append( 'image', newData);
-
-        console.log(formData);
-        
-        fetch( 'http://localhost:3000/api/user/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-            body: formData
-        })
-        .then( res => res.json() )
-        .then( data => console.log(data));
-
     }
 
+    console.log();
 
+    
     return (
     <div className='form-group'>
         <label className='mb-3'>Profilbild hochladen</label>
         <p className='dropzone-explain-p'>Drag 'n Drop oder Klick</p>
         <div className="profile-pic-container" {...getRootProps()}>
-            <input {...getInputProps({
-                onChange: (e) => handle(e),
-                maxsize,
-                multiple: false,
-                type: 'file',
-                className: 'form-control',
-                name: 'image',
-                placeholder: 'Dein Profilbild'
-            })}/>
+            <input onClick={(e) => handle(e)} type="file" className="form-control" id="image" value={data.image} placeholder="Dein Profilbild" {...getInputProps()}/>
             {
                 isDragActive ? 
                 <p className='far fa-caret-square-down dropzone-fa'></p> :
@@ -71,7 +55,7 @@ const RegisterDropzone = () => {
             }
          </div>
         <div className="profile-pic-preview">
-            <Thumbnail file={file}/>
+            {thumb}
         </div>
     </div>
     );
