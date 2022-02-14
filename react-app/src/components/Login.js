@@ -29,7 +29,7 @@ const Login = (props) => {
                         
                         <div className="btn-wrapper">
                             <NavLink to="/challenges">
-                                <button className="btn btn-primary my-3">
+                                <button className="start-btn btn btn-primary my-3">
                                     Anmelden
                                 </button>
                             </NavLink>

@@ -1,26 +1,35 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Menubar = (props) => {
     // const {} = props;
     return (
     <>
         <div className="menubar">
-            <div className="menu-option">
-                <div className="menu-option--icon"></div>
-                <div className="menu-option--label"></div>
-            </div>
-            <div className="menu-option">
-                <div className="menu-option--icon"></div>
-                <div className="menu-option--label"></div>
-            </div>
-            <div className="menu-option">
-                <div className="menu-option--icon"></div>
-                <div className="menu-option--label"></div>
-            </div>
-            <div className="menu-option">
-                <div className="menu-option--icon"></div>
-                <div className="menu-option--label"></div>
-            </div>
+            <NavLink to='/challenges' className="menu-option">
+                <div className="menu-option--icon">
+                    <i className='fas fa-bolt'></i>
+                </div>
+                <span className="menu-option--label">Challenges</span>
+            </NavLink>
+            <NavLink to='/pokemon' className="menu-option">
+                <div className="menu-option--icon">
+                    <i className='fas fa-dragon'></i>
+                </div>
+                <span className="menu-option--label">Pokémon</span>
+            </NavLink>
+            <NavLink to='/pokeshop' className="menu-option">
+                <div className="menu-option--icon">
+                    <i className='fas fa-store'></i>
+                </div>
+                <span className="menu-option--label">PokéShop</span>
+            </NavLink>
+            <NavLink to='/einstellungen' className="menu-option">
+                <div className="menu-option--icon">
+                    <i className='fas fa-cog'></i>
+                </div>
+                <span className="menu-option--label">Einstellungen</span>
+            </NavLink>
         </div>
     </>
     );

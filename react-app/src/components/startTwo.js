@@ -17,13 +17,13 @@ const startTwo = (props) => {
 
                 <div className="btn-wrapper">
                     <NavLink to="/login">
-                        <button className="btn btn-primary">
+                        <button className="start-btn btn btn-primary">
                             Anmelden
                         </button>
                     </NavLink>
 
                     <NavLink to="/register">
-                        <button className="btn btn-secondary my-3">
+                        <button className="start-btn btn btn-secondary my-3">
                             Registrieren
                         </button>
                     </NavLink>

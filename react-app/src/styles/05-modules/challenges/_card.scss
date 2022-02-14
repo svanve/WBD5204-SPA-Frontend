@@ -1,0 +1,55 @@
+.card {
+    margin-top: 8px;
+    border-radius: $border-radius;
+    border-color: $darkgrey;
+    background-color: $darkgrey;
+    margin: 1%;
+}
+
+.card-body {
+    background-color: $darkgrey;
+    border-radius: $border-radius;
+}
+
+.card-text {
+    font-size: $font-size-detail;
+    color: $detail-color;
+}
+
+.card-title {
+    font-size: $font-size-subheadline;
+}
+
+.challenge-spec--author {
+    span {
+        color: $highlight;
+    }
+}
+
+.link-btn {
+    width: 100%;
+}
+
+.link-btn--div {
+    width: 100%;
+    height: auto;
+    padding: 0 0 7px 0;
+    
+    i, 
+    span {
+        font-size: $font-size-base;
+    }
+}
+
+.poke-view--name {
+    span {
+        color: white;
+    }
+}
+
+.poke-view--reward {
+    span {
+        font-size: $font-size-detail;
+        color: $lightgrey;
+    }
+}

@@ -1,17 +1,22 @@
 import React from 'react';
 import PlusIcon from '../IconComponents/PlusIcon';
+import Menubar from './Menubar';
 
 const Header = (props) => {
     // const {} = props;
     return (
     <>
         <header className="header">
-            <div className="header-title">
-                <h1 className='h1'>Dynamic H1</h1>
+            
+            <div className="headerbar">
+                {props.children}
+                <div className="header-button">
+                    <PlusIcon/>
+                </div>
             </div>
-            <div className="header-button">
-                <PlusIcon/>
-            </div>
+
+            <Menubar></Menubar>
+            
         </header>
     </>
     );

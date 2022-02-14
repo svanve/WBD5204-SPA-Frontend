@@ -1,53 +1,39 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {useDropzone} from 'react-dropzone';
 import Thumbnail from './Thumbnail.js';
 // import { useLinkClickHandler } from 'react-router-dom';
 
-const RegisterDropzone = () => {
-
+const RegisterDropzone = ({ formdata, setFormdata }) => {
     // config file?
     const maxsize = 1000000;
 
-    const [file, setFile] = useState([]);
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({
-        accept: 'image/*',
-        onDrop: acceptedFiles => {
-            setFile( Object.assign(
-                acceptedFiles[0], 
-                { preview: URL.createObjectURL(acceptedFiles[0]) }
-            ));
-        }
-    });
+    console.log(formdata);
+    const onDrop = useCallback(acceptedFiles => {
+        // Do something with the files
+        setFormdata({
+            ...formdata,
+            image: acceptedFiles[0]
+        });
+      }, [formdata, setFormdata])
+      const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+
     
-    useEffect(() => {
-        // Make sure to revoke the data uris to avoid memory leaks
-        URL.revokeObjectURL(file.preview);
-    }, [file]);
 
-    // append Data to formData object
-    let formData = new FormData();
-    const [ data, setData ] = useState( {} );
-
-    function handle( e ) {
-        const newData = { ...data};
-        newData[ e.target.name ] = e.target.value;
-        setData( newData );
-
-        formData.append( 'image', newData);
-
-        console.log(formData);
-        
-        fetch( 'http://localhost:3000/api/user/register', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-            body: formData
-        })
-        .then( res => res.json() )
-        .then( data => console.log(data));
-
-    }
+    // const [file, setFile] = useState([]);
+    // const {getRootProps, getInputProps, isDragActive} = useDropzone({
+    //     accept: 'image/*',
+    //     onDrop: acceptedFiles => {
+    //         setFile( Object.assign(
+    //             acceptedFiles[0], 
+    //             { preview: URL.createObjectURL(acceptedFiles[0]) }
+    //         ));
+    //     }
+    // });
+    
+    // useEffect(() => {
+    //     // Make sure to revoke the data uris to avoid memory leaks
+    //     URL.revokeObjectURL(file.preview);
+    // }, [file]);
 
 
     return (
@@ -56,7 +42,6 @@ const RegisterDropzone = () => {
         <p className='dropzone-explain-p'>Drag 'n Drop oder Klick</p>
         <div className="profile-pic-container" {...getRootProps()}>
             <input {...getInputProps({
-                onChange: (e) => handle(e),
                 maxsize,
                 multiple: false,
                 type: 'file',
@@ -71,7 +56,7 @@ const RegisterDropzone = () => {
             }
          </div>
         <div className="profile-pic-preview">
-            <Thumbnail file={file}/>
+            {/* <Thumbnail file={file}/> */}
         </div>
     </div>
     );

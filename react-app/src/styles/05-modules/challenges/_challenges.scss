@@ -1,0 +1,57 @@
+// #m-challenges {
+
+// }
+
+.cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    min-height: 77vh;
+    align-content: flex-start;
+    margin-bottom: 88px;
+}
+
+.challenges-wrapper {
+    height: 100vh;
+    overflow-y: scroll;
+}
+
+.filterbar {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: $black;
+    flex: 1 1 auto;
+    color: white;
+    height: auto;
+    padding: 0 0 10px 0;
+    margin-top: 8px;
+    transition: all $easing-in-out;
+
+    &:hover {
+        background-color: $darkgrey;
+
+        .filter-icon,
+        .filter-text {
+            color: $highlight;
+        }
+
+    }
+}
+
+.filter-icon,
+.filter-text {
+    font-size: 16px;
+}
+
+.filter--my-challenges {
+    flex: 1 0 185px;
+}
+
+.filter--sort,
+.filter--filter {
+    flex: 1 1 87px;
+}

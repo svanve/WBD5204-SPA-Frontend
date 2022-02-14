@@ -1,5 +1,90 @@
+.content {
+    min-height: 100vh;
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    // background-color: $grey;
+}
+
+.content-view {
+    height: 100%;
+    background: $grey;
+    padding: 0 2% 0 2%;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
 .header {
-    height: 72px;
+    flex: 0 0 72px;
     width: 100%;
-    background-color: white;
+}
+
+.header-button {
+    align-self: center;
+    cursor: pointer;
+
+    &:hover path {
+        fill: $highlight-hover;
+    }
+}
+
+.headerbar {
+    width: 100%;
+    background-color: $black;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2% 0 2%;
+
+    h1 {
+        font-size: 30px;
+        line-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+main {
+    flex: auto;
+}
+
+.menubar {
+    background-color: $black;
+    position: absolute;
+    z-index: 10;
+    bottom: 0;
+    height: 88px;
+    width: 100%;
+    display: flex;
+}
+
+.menu-option {
+    flex: 1 1 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2% 0 2%;
+    cursor: pointer;
+    transition: all $easing-in-out;
+
+    &:hover {
+        background-color: $darkgrey;
+
+        .menu-option--icon,
+        .menu-option--label {
+            color: $highlight;
+        }
+    }
+
+    i {
+        font-size: 20px;
+    }
+
+    .menu-option--icon,
+    .menu-option--label  {
+        text-align: center;
+        color: $lightgrey;
+    }
 }

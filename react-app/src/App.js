@@ -1,14 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import StartOne from './components/StartOne';
-import StartTwo from './components/StartTwo';
+import Challenges from './components/ChallengeComponents/Challenges';
 import Login from './components/Login';
 import Register from './components/RegisterComponents/Register';
-import Challenges from './components/ChallengesComponents/Challenges';
-import Header from './components/LayoutComponents/Header';
-import Head from './components/LayoutComponents/Head.js';
-
+import StartOne from './components/StartOne';
+import StartTwo from './components/StartTwo';
 import Footer from './components/Footer/Footer';
 // import HookExample from './components/UseStateEx';
 import EffectHookExample from './components/UseEffectEx';
@@ -16,42 +13,27 @@ import EffectHookExample from './components/UseEffectEx';
 import './styles/main.scss';
 
 
-
-
 function App() {
   return (
     <Router>
-      <html lang='de'>
-        
-        <Head></Head>
+      <div className="content">
 
-        <body>
+          <Routes>
+              <Route path="/" element={<StartOne/>} />
+              <Route path="/start" element={<StartTwo/>} />
 
-          <div className="content">
+              <Route path="/login" element={<Login/>} />
+              <Route path="/register" element={<Register/>} />
 
-            <Header/>
+              <Route path="/challenges" element={<Challenges/>}></Route>
 
-            <main>
-              <Routes>
-                  <Route path="/" element={<StartOne/>} />
-                  <Route path="/start" element={<StartTwo/>} />
+              {/* Just an exercise: */}
+              <Route path="/useEffectHook" element={<EffectHookExample/>}/>
+          </Routes>       
 
-                  <Route path="/login" element={<Login/>} />
-                  <Route path="/register" element={<Register/>} />
-
-                  <Route path="/challenges" element={<Challenges/>}></Route>
-
-                  {/* Just an exercise: */}
-                  <Route path="/useEffectHook" element={<EffectHookExample/>}/>
-              </Routes>
-            </main>       
-
-          </div>
-          
-          <Footer></Footer>
-
-        </body>
-      </html>
+      </div>
+      
+      <Footer></Footer>
     </Router>
   )
 

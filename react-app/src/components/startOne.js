@@ -48,7 +48,7 @@ const startOne = () => {
 
                 <div className="btn-wrapper">
                 <NavLink to="/start">
-                    <button className="btn btn-primary">
+                    <button className="start-btn btn btn-primary">
                         Los geht's!
                     </button>
                 </NavLink>

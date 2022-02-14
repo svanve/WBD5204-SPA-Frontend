@@ -59,15 +59,6 @@ ul {
     list-style: none;
 }
 
-.content {
-    min-height: 100vh;
-    flex: 1 0 auto;
-}
-
-footer {
-    flex-shrink: 0;
-}
-
 a {
     text-decoration: none;
     color: $highlight;
