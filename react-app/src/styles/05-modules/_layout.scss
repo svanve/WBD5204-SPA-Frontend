@@ -70,7 +70,7 @@ main {
     transition: all $easing-in-out;
 
     &:hover {
-        background-color: $darkgrey;
+        background-color: $hover-black;
 
         .menu-option--icon,
         .menu-option--label {

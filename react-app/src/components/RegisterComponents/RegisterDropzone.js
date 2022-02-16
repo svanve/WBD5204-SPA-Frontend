@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import {useDropzone} from 'react-dropzone';
-import Thumbnail from './Thumbnail.js';
+// import Thumbnail from './Thumbnail.js';
 // import { useLinkClickHandler } from 'react-router-dom';
 
 const RegisterDropzone = ({ formdata, setFormdata }) => {

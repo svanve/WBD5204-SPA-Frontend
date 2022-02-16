@@ -14,6 +14,11 @@
 .challenges-wrapper {
     height: 100vh;
     overflow-y: scroll;
+    background-color: $grey;
+}
+
+.display-dropdown {
+    display: flex !important;
 }
 
 .filterbar {
@@ -32,26 +37,58 @@
     transition: all $easing-in-out;
 
     &:hover {
-        background-color: $darkgrey;
+        background-color: $hover-black;
 
         .filter-icon,
         .filter-text {
             color: $highlight;
         }
-
     }
 }
 
 .filter-icon,
 .filter-text {
     font-size: 16px;
+    color: $lightgrey;
 }
 
 .filter--my-challenges {
     flex: 1 0 185px;
 }
 
-.filter--sort,
-.filter--filter {
-    flex: 1 1 87px;
+.filter--community {
+    flex: 1 1 120px;
+}
+
+.filter--sort-wrapper {
+    flex: 1 1 90px;
+    position: relative;
+}
+
+.sort-dropdown {
+    position: absolute;
+    z-index: 10;
+    background: $black;
+    display: none;
+    flex-direction: column;
+    border-radius: $border-radius;
+    min-width: 300px;
+    margin-top: 2px;
+}
+
+.sort-option {
+    color: $lightgrey;
+    border-bottom: solid $darkgrey 1px;
+    padding: 2% 10%;
+    cursor: pointer;
+    border-radius: $border-radius;
+
+    &:hover {
+        color: $highlight;
+        background-color: $hover-black;
+    }
+
+    &:last-child {
+        border: none;
+    }
 }

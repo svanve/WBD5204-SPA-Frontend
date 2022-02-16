@@ -9,7 +9,7 @@ const Card = (props) => {
 
     return (
     <>
-        <div className="col-sm-6 col-md-4 col-xl-3">
+        <div className="col-sm-6 col-md-4 col-xl-3 col-xxl-2">
             <div className="card">
                 <div className="card-body">
                     <div className="card-body--wrap row mb-2">

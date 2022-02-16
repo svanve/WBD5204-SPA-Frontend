@@ -58,7 +58,7 @@ const Register = (props) => {
                     <p className='h1'>Registrieren</p>
                 </div>
                 
-                <form onSubmit={(e) => onSubmitHandler(e)} novalidate>
+                <form onSubmit={(e) => onSubmitHandler(e)} noValidate>
                     <div className="form-group">
                         <label htmlFor="prename">Vorname</label>
                         <input onChange={(e) => setFormdata({...formdata, firstname: e.target.value})} value={formdata.firstname} type="text" className="form-control" id="prename" name="firstname" aria-describedby="firstNameHelp" placeholder="Dein Vorname"/>
