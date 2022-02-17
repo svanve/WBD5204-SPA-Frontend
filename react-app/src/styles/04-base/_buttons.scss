@@ -26,6 +26,7 @@
 
     &:hover {
         background-color: $primary-hover;
+        color: $primary-text-hover;
     }
     
     &:active {
@@ -70,6 +71,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 40px;
 }
 
 .btn {
@@ -80,6 +82,37 @@
 
     a {
         color: $white;
+    }
+}
+
+.button-close {
+    color: white;
+    font-size: 52px;
+    opacity: 1;
+    transition: $easing-in-out;
+    width: 52px;
+    display: flex;
+    justify-content: center;
+    border-radius: $border-radius;
+
+    &:hover {
+        background-color: $grey;
+    }
+}
+
+.delete-btn {
+    margin-bottom: 5px;
+
+    &:hover {
+        background-color: $danger !important;
+    }
+}
+
+.edit-btn {
+    border-radius: $border-radius;
+
+    &:hover {
+        background-color: $success;
     }
 }
 

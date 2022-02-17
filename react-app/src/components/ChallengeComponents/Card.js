@@ -4,7 +4,6 @@ import Pikachu from '../IconComponents/Pikachu';
 
 const Card = (props) => {
     // const {} = props;
-
     // get Data here
 
     return (
@@ -32,12 +31,31 @@ const Card = (props) => {
                             <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
                         </div>
                     </div>
-                    <NavLink to="/start" className="link-btn">
+
+                    {
+                        (props.filter === 'getMine') 
+                        ? 
+                        <>
+                            <div className="link-btn--div btn btn-secondary me-2 delete-btn">
+                                <i className="far fa-trash-alt me-2"></i>
+                                <span className="delete-span">Löschen</span>
+                            </div>
+                            <NavLink to="/start" className="link-btn">
+                                <div className="link-btn--div btn btn-primary edit-btn">
+                                    <i className="far fa-edit me-2"></i>
+                                    <span className="edit-span">Bearbeiten</span>
+                                </div>
+                            </NavLink>
+                        </> 
+                        :
+                        <NavLink to="/start" className="link-btn">
                         <div className="link-btn--div btn btn-primary">
                             <i className="fas fa-bolt me-2"></i>
                             <span className="challenge-cta">Challenge!</span>
                         </div>
-                    </NavLink>
+                        </NavLink>
+                    }
+
                 </div>
             </div>
         </div>

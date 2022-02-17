@@ -16,7 +16,7 @@ const Login = (props) => {
                         <p className='h1'>Login</p>
                     </div>
                     
-                    <form enctype="multipart/form-data">
+                    <form>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
                             <input type="text" className="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Dein Username"/>

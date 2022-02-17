@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 
 import BackIcon from '../IconComponents/BackIcon';
 import RegisterDropzone from './RegisterDropzone';
@@ -17,12 +17,14 @@ const Register = (props) => {
         username: '',
         email: '',
         password: '',
+        password_repeat: '',
         image: null
     } );
 
     async function onSubmitHandler( e ) {
         e.preventDefault();
 
+        console.log(formdata);
         const formData = new FormData();
 
         for (const key in formdata) {
@@ -35,15 +37,16 @@ const Register = (props) => {
 
         const response = await fetch( 'http://localhost:8888/api/user/register', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/formdata'
-            },
             body: formData
         })
 
         const data = await response.json();
-        console.log(data);
-
+        
+        // const history = useHistory();
+        // if ( data.success === true ) {
+        //     history.push('/challenges');
+        // }
+        
     }
 
     return (
@@ -85,7 +88,7 @@ const Register = (props) => {
                     </div>
                     <div className="form-group">
                         <label htmlFor="password-repeat">Passwort wiederholen</label>
-                        <input type="password" className="form-control" id="password-repeat" name="password_repeat" placeholder="Passwort"/>
+                        <input onChange={(e) => setFormdata({...formdata, password_repeat: e.target.value})} value={formdata.password_repeat} type="password" className="form-control" id="password-repeat" name="password_repeat" placeholder="Passwort"/>
                     </div>
 
                     <RegisterDropzone formdata={formdata} setFormdata={setFormdata}></RegisterDropzone>

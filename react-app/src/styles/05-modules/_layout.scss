@@ -24,11 +24,14 @@ footer {
 .header-button {
     align-self: center;
     cursor: pointer;
+    border-radius: 6px;
+    transition: $easing-in-out;
 
-    &:hover path {
-        fill: $highlight-hover;
+    &:hover {
+        background-color: $grey;
     }
 }
+
 
 .headerbar {
     width: 100%;
