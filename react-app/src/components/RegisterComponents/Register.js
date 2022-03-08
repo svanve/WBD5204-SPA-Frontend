@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import BackIcon from '../IconComponents/BackIcon';
 import RegisterDropzone from './RegisterDropzone';
 
 const Register = (props) => {
-    // const {} = props;
-
-    // 1) append FormData from all but Dropzone
-    //
-    // 2) submit formData
+    const navigate = useNavigate();
+    const [ errors, setErrors ] = useState([]);
+    const [ boxStatus, setBoxStatus ] = useState(false);
 
     const [ formdata, setFormdata ] = useState( {
         firstname: '',
@@ -21,19 +19,17 @@ const Register = (props) => {
         image: null
     } );
 
+
+
     async function onSubmitHandler( e ) {
         e.preventDefault();
 
-        console.log(formdata);
+
         const formData = new FormData();
 
         for (const key in formdata) {
             formData.append( key, formdata[key] )
         }
-
-        // for(var pair of formData.entries()) {
-        //     console.log(pair[0]+ ', '+ pair[1]);
-        // }
 
         const response = await fetch( 'http://localhost:8888/api/user/register', {
             method: 'POST',
@@ -42,11 +38,28 @@ const Register = (props) => {
 
         const data = await response.json();
         
-        // const history = useHistory();
-        // if ( data.success === true ) {
-        //     history.push('/challenges');
-        // }
-        
+
+        if ( response.status === 200 ) {
+            // output success message
+
+            // show challenges
+            navigate('/challenges');
+        } else {
+            // output error message from response object
+
+            const errorsArray =Object.values(data.errors);
+
+            const errorsMerged = [].concat.apply([], errorsArray);
+            
+            if ( !boxStatus ) {
+                setErrors([]);
+                setErrors([...errorsMerged, 'Bitte stimme den AGB zu, bevor du das Formular abschickt.']);
+            } else {
+                setErrors([]);
+                setErrors(errorsMerged);
+            }
+            
+        }
     }
 
     return (
@@ -65,22 +78,18 @@ const Register = (props) => {
                     <div className="form-group">
                         <label htmlFor="prename">Vorname</label>
                         <input onChange={(e) => setFormdata({...formdata, firstname: e.target.value})} value={formdata.firstname} type="text" className="form-control" id="prename" name="firstname" aria-describedby="firstNameHelp" placeholder="Dein Vorname"/>
-                        <small id="firstNameHelp" className="form-text text-muted">Gib deinen Vornamen ein.</small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="last-name">Nachname</label>
                         <input onChange={(e) => setFormdata({...formdata, lastname: e.target.value})} value={formdata.lastname} type="text" className="form-control" id="last-name" name="lastname" aria-describedby="lastNameHelp" placeholder="Dein Nachname"/>
-                        <small id="lastNameHelp" className="form-text text-muted">Gib deinen Nachnamen ein.</small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input onChange={(e) => setFormdata({...formdata, username: e.target.value})} value={formdata.username} type="text" className="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Dein Username"/>
-                        <small id="usernameHelp" className="form-text text-muted">Bitte gib einen gültigen Usernamen ein.</small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Emailaddresse</label>
                         <input onChange={(e) => setFormdata({...formdata, email: e.target.value})} value={formdata.email} type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Deine Email"/>
-                        <small id="emailHelp" className="form-text text-muted">Bitte gib eine gültige Emailadresse ein.</small>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Passwort</label>
@@ -94,13 +103,32 @@ const Register = (props) => {
                     <RegisterDropzone formdata={formdata} setFormdata={setFormdata}></RegisterDropzone>
                     
                     <div className="form-group form-check">
-                        <input type="checkbox" className="form-check-input" id="agb"/>
+                        <input onChange={() => (!boxStatus) ? setBoxStatus(true) : setBoxStatus(false)} type="checkbox" className="form-check-input" id="agb"/>
                         <label className="form-check-label" htmlFor="agb">Ich habe die AGB gelesen und stimme ihnen zu.</label>
                     </div>
+
+                    {
+                        
+                        ( errors ) ?
+                        
+                        errors.map( (error, idx) => { 
+                            return (
+                                <>
+                                    <small className="form-text text-warning" key={idx}>{error}</small>
+                                    <br key={idx/100}/>
+                                </>
+                            )
+                        })
+
+                        :
+                        <></>
+
+                    }
+                    
                     <div className="btn-wrapper">
-                            <button className="start-btn btn btn-primary my-3">
-                                Registrieren
-                            </button>
+                        <button className="start-btn btn btn-primary my-3">
+                            Registrieren
+                        </button>
                     </div>
                 </form>
                 

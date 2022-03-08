@@ -1,9 +1,55 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import BackIcon from './IconComponents/BackIcon';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Login = (props) => {
     // const {} = props;
+    const navigate = useNavigate();
+    const [ error, setError ] = useState('');
+
+    const [ formdata, setFormdata ] = useState( {
+        username: '',
+        password: ''
+    } );
+
+    useEffect( () => {
+        
+    }, [error]);
+
+    async function submitHandler(e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+
+        for (const key in formdata) {
+            formData.append( key, formdata[key] )
+        }
+
+        const response = await fetch( 'http://localhost:8888/api/user/login', {
+            method: 'POST',
+            body: formData
+        })
+
+        const data = await response.json();
+        
+        console.log(response);
+
+        if ( response.status === 200 ) {
+             // output success message
+            navigate('/challenges');
+        } else {
+             // output error message from response object
+            
+            
+            for (const key in data.errors) {
+                setError(data.errors[key][0]);
+            }
+        }
+
+    }
+
+
+
     return (
         <>
             <div id="m-login" >
@@ -16,23 +62,23 @@ const Login = (props) => {
                         <p className='h1'>Login</p>
                     </div>
                     
-                    <form>
+                    <form onSubmit={(e)=>submitHandler(e)}>
                         <div className="form-group">
                             <label htmlFor="username">Username</label>
-                            <input type="text" className="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Dein Username"/>
-                            <small id="usernameHelp" className="form-text text-muted">Bitte gib einen gültigen Usernamen ein.</small>
+                            <input onChange={(e)=>setFormdata({...formdata, username: e.target.value})} value={formdata.username} type="text" className="form-control" id="username" name="username" aria-describedby="usernameHelp" placeholder="Dein Username"/>
+                            
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Passwort</label>
-                            <input type="password" className="form-control" id="password" name="password" placeholder="Passwort"/>
+                            <input onChange={(e)=>setFormdata({...formdata, password: e.target.value})} value={formdata.password}  type="password" className="form-control" id="password" name="password" placeholder="Passwort"/>
                         </div>
+
+                        <small id="usernameHelp" className="form-text text-warning">{error}</small>
                         
                         <div className="btn-wrapper">
-                            <NavLink to="/challenges">
-                                <button className="start-btn btn btn-primary my-3">
-                                    Anmelden
-                                </button>
-                            </NavLink>
+                            <button className="start-btn btn btn-primary my-3">
+                                Anmelden
+                            </button>
                         </div>
                     </form>
                     

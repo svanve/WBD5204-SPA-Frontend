@@ -1,40 +1,33 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import {useDropzone} from 'react-dropzone';
-// import Thumbnail from './Thumbnail.js';
+import Thumbnail from './Thumbnail.js';
 // import { useLinkClickHandler } from 'react-router-dom';
 
 const RegisterDropzone = ({ formdata, setFormdata }) => {
     // config file?
     const maxsize = 1000000;
 
-    console.log(formdata);
+    const [file, setFile] = useState('');
+
     const onDrop = useCallback(acceptedFiles => {
-        // Do something with the files
+        const reader = new FileReader();
+
+        reader.readAsDataURL(acceptedFiles[0]);
+
+        reader.onload = function () {
+            setFile(reader.result);
+          };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+          };
+
         setFormdata({
             ...formdata,
             image: acceptedFiles[0]
         });
       }, [formdata, setFormdata])
+    
       const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-
-    
-
-    // const [file, setFile] = useState([]);
-    // const {getRootProps, getInputProps, isDragActive} = useDropzone({
-    //     accept: 'image/*',
-    //     onDrop: acceptedFiles => {
-    //         setFile( Object.assign(
-    //             acceptedFiles[0], 
-    //             { preview: URL.createObjectURL(acceptedFiles[0]) }
-    //         ));
-    //     }
-    // });
-    
-    // useEffect(() => {
-    //     // Make sure to revoke the data uris to avoid memory leaks
-    //     URL.revokeObjectURL(file.preview);
-    // }, [file]);
-
 
     return (
     <div className='form-group'>
@@ -56,7 +49,7 @@ const RegisterDropzone = ({ formdata, setFormdata }) => {
             }
          </div>
         <div className="profile-pic-preview">
-            {/* <Thumbnail file={file}/> */}
+            <Thumbnail file={file}/>
         </div>
     </div>
     );

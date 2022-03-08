@@ -14,19 +14,21 @@ const Challenges = (props) => {
     
     
     useEffect( () => {
-        console.log(filter);
-        console.log(sort);
+
         fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`)
-        .then(res=>console.log(res))
-        .then(data=>console.log(data))
-        .catch(err=> console.log(err));
-    }, [ sort, filter] );          
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch(err=> console.log(err));
+        
+    }, [ sort, filter] );
 
 
     function display(e) {
         e.currentTarget.children[1].classList.toggle('display-dropdown');
     }
-                        
+     
     return (
         <>
             <div className="challenges-wrapper">

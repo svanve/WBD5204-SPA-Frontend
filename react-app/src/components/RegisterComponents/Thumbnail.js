@@ -4,9 +4,9 @@ const Thumbnail = ( { file } ) => {
     // const {} = props;
 
     return (
-        <div className='preview-outter-container' key={file.name}>
+        <div className='preview-outter-container'>
             <img
-                src={file.preview}
+                src={file}
                 className='preview-img'
                 alt=''
             />

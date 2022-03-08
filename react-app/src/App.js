@@ -7,7 +7,6 @@ import Register from './components/RegisterComponents/Register';
 import StartOne from './components/StartOne';
 import StartTwo from './components/StartTwo';
 import Footer from './components/Footer/Footer';
-// import HookExample from './components/UseStateEx';
 import EffectHookExample from './components/UseEffectEx';
 
 import './styles/main.scss';
