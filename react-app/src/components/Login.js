@@ -33,15 +33,13 @@ const Login = (props) => {
         const data = await response.json();
         
 
-
         if ( response.status === 200 ) {
 
-            localStorage.setItem( 'jwt', 'AUTHORIZE ' + data.jwt )
+            // read documentation to authorization header problem
+            // localStorage.setItem( 'jwt', 'AUTHORIZE ' + data.jwt );   
             
             navigate('/challenges');
         } else {
-             // output error message from response object
-            
             
             for (const key in data.errors) {
                 setError(data.errors[key][0]);

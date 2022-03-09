@@ -1,34 +1,13 @@
 import React from 'react';
+import pokemons from '../../data/pokemons.json';
+import questions from '../../data/questions.json';
 
-const CreateChallenge = (props) => {
-    // const {} = props;
+const CreateChallenge = () => {
 
-    const data = {
-        pokemons: [
-            {
-                id: 1,
-                name: 'Pikachu',
-                level: 66,
-                pokedex_no: 25
-            }, 
-            {
-                id: 2,
-                name: 'Bisasam',
-                level: 66,
-                pokedex_no: 2
-            }
-        ],
-        questions: [ 
-            {
-                content: 'Wie heisst das Starter-pokémon vom Typ Feuer in Pokemon Rot/Blau?',
-
-            },
-            {
-                content: 'Welchen Pokémon-Typ trainiert der Trainer der ersten Arena in Pokémon Blau?',
-
-            }
-            ]
-    }
+    const p = Object.values(pokemons).flat();
+    const q = Object.values(questions).flat();
+    
+    
 
     return (
     <>
@@ -49,8 +28,7 @@ const CreateChallenge = (props) => {
                         <label htmlFor="challenge-pokemon-ip">Pokémon</label>
                         <select type="text" name="pokemon_id" id="challenge-pokemon-ip" className='form-control' aria-label="Default select example">
                         <option defaultValue>Welches Pokémon soll herausgefordert werden?</option>
-                            {data.pokemons.map( ( pokemon, index ) => {
-                                console.log(pokemon.name);
+                            {p.map( ( pokemon, index ) => {
                                 return <option value={pokemon.id} key={index} title={pokemon.name}>{pokemon.name}</option>;
                             })}
                         </select>
@@ -60,7 +38,7 @@ const CreateChallenge = (props) => {
                         <label htmlFor="challenge-question-ip">Frage deiner Challenge</label>
                         <select type="text" name="question_id" id="challenge-question-ip" className='form-control' aria-label="Default select example">
                             <option defaultValue>Wähle deine Frage.</option>
-                            {data.questions.map( ( question, index ) => {
+                            {q.map( ( question, index ) => {
                                 return <option value={question.id} key={index} title={question.content}>{question.content}</option>
                             })}
                         </select> 

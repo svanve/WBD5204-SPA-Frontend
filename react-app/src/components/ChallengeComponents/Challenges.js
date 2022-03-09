@@ -5,19 +5,44 @@ import PlusIcon from '../IconComponents/PlusIcon';
 import CreateChallenge from './CreateChallenge';
 import Card from './Card';
 
+// import axios from 'axios'; // Read documentation about auhtorization header problem
+// import XHR from '../../XHR'; // Read documentation about auhtorization header problem
+
 const Challenges = (props) => {
     // const {} = props;
 
     const [ create, setCreate ] = useState(false);
     const [ sort, setSort ] = useState( 'id' );
     const [ filter, setFilter ] = useState( 'getCommunity' );
+
     
-    
+    // useEffect( () => {
+
+    //     let token = localStorage.getItem( 'jwt' );
+    //     console.log(token);
+
+    //     const headers = {
+
+    //         'Authorization': `${token}`
+    //     }
+
+    //     const url = `http://localhost:8888/api/challenges/${filter}/${sort}`;
+
+    //     axios.get( url, { headers } )
+    //     .then((res) => console.log(res))
+    //     .catch((err) => console.log(err));
+        
+    // }, [ sort, filter] );
+
     useEffect( () => {
+
+        // read documentation about authorization header problem
+        // let token = localStorage.getItem( 'jwt' );
 
         fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`)
             .then(res => res.json())
             .then((data) => {
+                
                 console.log(data);
             })
             .catch(err=> console.log(err));
