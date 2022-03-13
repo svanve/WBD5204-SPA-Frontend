@@ -5,11 +5,14 @@ const Thumbnail = ( { file } ) => {
 
     return (
         <div className='preview-outter-container'>
-            <img
-                src={file}
-                className='preview-img'
-                alt=''
-            />
+            {(file !== '') ?
+                <img
+                    src={file}
+                    className='preview-img'
+                    alt=''
+                /> :
+                <></>
+            }
         </div>
     );
 }
