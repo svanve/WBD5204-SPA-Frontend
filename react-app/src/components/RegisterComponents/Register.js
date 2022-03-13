@@ -19,8 +19,6 @@ const Register = (props) => {
         image: null
     } );
 
-
-
     async function onSubmitHandler( e ) {
         e.preventDefault();
 
@@ -47,7 +45,7 @@ const Register = (props) => {
         } else {
             // output error message from response object
 
-            const errorsArray =Object.values(data.errors);
+            const errorsArray = Object.values(data.errors);
 
             const errorsMerged = [].concat.apply([], errorsArray);
             

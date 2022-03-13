@@ -33,11 +33,11 @@ const Login = (props) => {
         const data = await response.json();
         
 
-        if ( response.status === 200 ) {
+        if ( data.success ) {
 
             // read documentation to authorization header problem
-            // localStorage.setItem( 'jwt', 'AUTHORIZE ' + data.jwt );   
-            
+            localStorage.setItem( 'jwt', 'AUTHORIZE ' + data.jwt );   
+            console.log(document.cookie);
             navigate('/challenges');
         } else {
             
