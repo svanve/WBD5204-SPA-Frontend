@@ -41,7 +41,7 @@ const Card = (props) => {
                                 <span className="delete-span">Löschen</span>
                             </div>
                             <NavLink to="/start" className="link-btn">
-                                <div className="link-btn--div btn btn-primary edit-btn">
+                                <div className="link-btn--div btn btn-tertiary edit-btn">
                                     <i className="far fa-edit me-2"></i>
                                     <span className="edit-span">Bearbeiten</span>
                                 </div>

@@ -59,6 +59,25 @@
     }
 }
 
+.btn-tertiary {
+    background-color: $tertiary;
+    transition: $easing-in-out;
+
+    &:hover {
+        background-color: $tertiary-hover;
+    }
+    
+    &:active {
+        background-color: $tertiary-hover;
+        box-shadow: 0 0 0 0.25rem $white;
+    }
+
+    &:focus {
+        background-color: $tertiary-click;
+        box-shadow: 0 0 0 0.25rem $highlight;
+    }
+}
+
 .btn-primary-blocked {
     background-color: $primary-disabled;
 }
@@ -105,6 +124,14 @@
 
     &:hover {
         background-color: $danger !important;
+    }
+}
+
+.edit-btn {
+    color: $black;
+
+    &:hover {
+        color: $white;
     }
 }
 
