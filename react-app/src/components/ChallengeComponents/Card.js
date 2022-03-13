@@ -17,18 +17,18 @@ const Card = (props) => {
                                 <Pikachu/>
                             </div>
                             <div className="poke-view--name">
-                                <span>Pikachu</span>
+                                <span>{props.pokemon}</span>
                             </div>
                             <div className="poke-view--reward">
-                                <span>lvl. 66 | +3$</span>
+                                <span>Lvl. {props.level} | +{props.reward}$</span>
                             </div>
                         </div>
                         <div className="challenge-spec col-7">
-                            <h3 className="h3 card-title">Special title treatment</h3>
+                            <h3 className="h3 card-title">{props.title}</h3>
                             <div className="challenge-spec--author">
-                                <span>MandyMan33</span>
+                                <span>{props.username}</span>
                             </div>
-                            <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <p className="card-text">{props.description}</p>
                         </div>
                     </div>
 

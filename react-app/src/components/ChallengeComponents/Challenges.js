@@ -5,7 +5,6 @@ import PlusIcon from '../IconComponents/PlusIcon';
 import CreateChallenge from './CreateChallenge';
 import Card from './Card';
 
-// import axios from 'axios'; // Read documentation about auhtorization header problem
 // import XHR from '../../XHR'; // Read documentation about auhtorization header problem
 
 const Challenges = (props) => {
@@ -14,36 +13,28 @@ const Challenges = (props) => {
     const [ create, setCreate ] = useState(false);
     const [ sort, setSort ] = useState( 'id' );
     const [ filter, setFilter ] = useState( 'getCommunity' );
+    const [ data, setData ] = useState( [] );
 
-    
-    // useEffect( () => {
-
-    //     let token = localStorage.getItem( 'jwt' );
-    //     console.log(token);
-
-    //     const headers = {
-
-    //         'Authorization': `${token}`
-    //     }
-
-    //     const url = `http://localhost:8888/api/challenges/${filter}/${sort}`;
-
-    //     axios.get( url, { headers } )
-    //     .then((res) => console.log(res))
-    //     .catch((err) => console.log(err));
-        
-    // }, [ sort, filter] );
 
     useEffect( () => {
 
-        // read documentation about authorization header problem
+        // read documentation about authorization header problem:
         // let token = localStorage.getItem( 'jwt' );
 
-        fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`)
+        // console.log(token);
+
+        fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`, {
+            // headers: {
+            //      credentials: 'include',
+            //      authorization: token
+            // }
+        })
             .then(res => res.json())
             .then((data) => {
-                
                 console.log(data);
+                const dataArr = Object.values(data.result);
+
+                setData(dataArr);
             })
             .catch(err=> console.log(err));
         
@@ -103,25 +94,23 @@ const Challenges = (props) => {
                         </div>
 
                         <div className="cards-wrapper">
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
-                            <Card filter={filter}></Card>
+                            {
+                                data.map( (challenge, key ) => {
+                                    return ( 
+                                        <Card 
+                                            key={key} 
+                                            filter={filter} 
+                                            title={challenge.title}
+                                            description={challenge.description}
+                                            username={challenge.username}
+                                            filename={challenge.filename}
+                                            pokemon={challenge.name}
+                                            level={challenge.level}
+                                            reward={challenge.question_level}                                            
+                                        >
+                                        </Card>
+                                )} )
+                            }
                         </div>
 
                     </div>
