@@ -1,12 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import pokemons from '../../data/pokemons.json';
-import questions from '../../data/questions.json';
 
-const CreateChallenge = () => {
+const CreateChallenge = ({mode, values}) => {
 
-    const p = Object.values(pokemons).flat();
-    const q = Object.values(questions).flat();
+    const [ questions, setQuestions ] = useState([]);
+    const [ pokemons, setPokemons ] = useState([]);    
     
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
@@ -22,6 +20,59 @@ const CreateChallenge = () => {
         question_id: question_id
     }
 
+    useEffect( () => {
+        // put headerbar back in place after open overlay when page is scrolled down
+        const cWrapper = document.querySelector('.challenges-wrapper');
+        cWrapper.style.scrollBehavior = 'unset'; 
+        cWrapper.scrollTo(0, 0);
+        cWrapper.style.scrollBehavior = 'smooth';
+
+        // get all Questions
+        fetch( 'http://localhost:8888/api/questions/getQuestions' )
+            .then( (res) => res.json())
+            .then( (data) => {
+                
+                const q = Object.values(data.result);
+                setQuestions(q);
+            })
+            .catch( (err) => console.log(err))
+
+        // get all Pokemons
+        fetch( 'http://localhost:8888/api/pokemons/getPokemons' )
+            .then( (res) => res.json())
+            .then( (data) => {
+                
+                const p = Object.values(data.result);
+                setPokemons(p);
+            })
+            .catch( (err) => console.log(err))
+
+    }, [])
+
+    
+    useEffect( () => {
+        // setting values of challenge to be edited
+        if ( mode === 'edit' ) {
+
+            if ( pokemons !== undefined && questions !== undefined ) {
+                
+                const foundP = pokemons.find( el => el.name === values.pokemon );
+                if ( foundP !== undefined ) {    
+                    setPokemon_id(foundP.id);
+                }
+
+                const foundQ = questions.find( el => el.content === values.question );
+                if ( foundQ !== undefined ) {
+                    setQuestion_id(foundQ.id);
+                }
+            }
+            
+            setTitle(values.title)
+            setDescription(values.description)
+        }
+    }, [ pokemons, questions ] )
+
+
     async function handleSubmit( e ) {
         
         e.preventDefault();
@@ -35,7 +86,6 @@ const CreateChallenge = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            mode: 'same-origin',
             body: body
         });
 
@@ -53,6 +103,21 @@ const CreateChallenge = () => {
         }
     }
 
+    function handleEdit() {
+        console.log(data);
+        fetch( `http://localhost:8888/api/challenges/update/${values.cid}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }
+        )
+            .then( (res) => res.json())
+            .then( (data) => console.log(data))
+            .catch( (err) => console.log(err))
+    }
+
     return (
     <>
         <div id="create-offset-layer">
@@ -60,19 +125,19 @@ const CreateChallenge = () => {
                 <form id="create-form" method='post' noValidate onSubmit={(e) => handleSubmit(e)}>
                     <div className="form-group create-form-group">
                         <label htmlFor="challenge-title-ip">Titel</label>
-                        <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="challenge-title-ip" className='form-control'/>
+                        <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="challenge-title-ip" className='form-control' placeholder='Mein Beispieltitel'/>
                     </div>
 
                     <div className="form-group create-form-group">
                         <label htmlFor="challenge-description-ip">Beschreibung</label>
-                        <input onChange={(e) => setDescription(e.target.value)} value={description} type="text" name="description" id="challenge-description-ip" className='form-control'/>
+                        <input onChange={(e) => setDescription(e.target.value)} value={description} type="text" name="description" id="challenge-description-ip" className='form-control' placeholder='Mein Beispieltext'/>
                     </div>
 
                     <div className="form-group create-form-group">
                         <label htmlFor="challenge-pokemon-ip">Pokémon</label>
-                        <select onChange={(e) => setPokemon_id(e.target.value)} value={pokemon_id} type="text" name="pokemon_id" id="challenge-pokemon-ip" className='form-control' aria-label="Default select example">
-                        <option defaultValue>Welches Pokémon soll herausgefordert werden?</option>
-                            {p.map( ( pokemon, index ) => {
+                        <select onChange={(e) => setPokemon_id(e.target.value)} value={pokemon_id} type="text" name="pokemon_id" id="challenge-pokemon-ip" className='form-select' aria-label="Default select example">
+                        <option defaultValue disabled>Welches Pokémon soll herausgefordert werden?</option>
+                            {pokemons.map( ( pokemon, index ) => {
                                 return <option value={pokemon.id} key={index} title={pokemon.name}>{pokemon.name}</option>;
                             })}
                         </select>
@@ -80,18 +145,24 @@ const CreateChallenge = () => {
 
                     <div className="form-group create-form-group">
                         <label htmlFor="challenge-question-ip">Frage deiner Challenge</label>
-                        <select onChange={(e) => setQuestion_id(e.target.value)} value={question_id} type="text" name="question_id" id="challenge-question-ip" className='form-control' aria-label="Default select example">
-                            <option defaultValue>Wähle deine Frage.</option>
-                            {q.map( ( question, index ) => {
+                        <select onChange={(e) => setQuestion_id(e.target.value)} value={question_id} type="text" name="question_id" id="challenge-question-ip" className='form-select' aria-label="Default select example">
+                            <option defaultValue disabled className="text-muted">Wähle deine Frage</option>
+                            {questions.map( ( question, index ) => {
                                 return <option value={question.id} key={index} title={question.content}>{question.content}</option>
                             })}
                         </select> 
                     </div>
 
                     <div className="btn-wrapper">
-                        <button className="start-btn btn btn-primary my-3">
-                            Challenge erstellen!
-                        </button>
+                        {
+                            (mode === "create") ?
+                            <button className="start-btn btn btn-primary my-3">
+                                Challenge erstellen!
+                            </button> :
+                            <button type="button" className="start-btn btn btn-primary my-3" onClick={() => handleEdit()}>
+                                Challenge überschreiben
+                            </button>
+                        }
                     </div>
                 </form>
             </div>
