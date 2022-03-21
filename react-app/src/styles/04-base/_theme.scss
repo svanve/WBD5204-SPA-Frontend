@@ -4,6 +4,10 @@ body {
     scroll-behavior: unset;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     background-color: $bg-color;
     font-family: $font-base;
