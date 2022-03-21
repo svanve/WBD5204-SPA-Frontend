@@ -104,7 +104,7 @@ const CreateChallenge = ({mode, values}) => {
     }
 
     function handleEdit() {
-        console.log(data);
+        
         fetch( `http://localhost:8888/api/challenges/update/${values.cid}`, {
                 method: 'PUT',
                 headers: {
