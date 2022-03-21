@@ -21,7 +21,14 @@ footer {
     width: 100%;
 }
 
+.header-button--wrapper {
+    align-items: center;
+    display: flex;
+}
+
 .header-button {
+    height: 52px;
+    width: 52px;
     align-self: center;
     cursor: pointer;
     border-radius: 6px;
@@ -32,6 +39,17 @@ footer {
     }
 }
 
+.header-button--create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5px;
+
+    i {
+        font-size: 33px;
+        color: $lightgrey;
+    }
+}
 
 .headerbar {
     width: 100%;
