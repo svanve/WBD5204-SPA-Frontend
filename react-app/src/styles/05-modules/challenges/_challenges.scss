@@ -9,12 +9,19 @@
     min-height: 77vh;
     align-content: flex-start;
     margin-bottom: 88px;
+
+    > div {
+        @media screen and (max-width: 576px) {
+            width: 100%;
+        }
+    }
 }
 
 .challenges-wrapper {
     height: 100vh;
     overflow-y: scroll;
     background-color: $grey;
+    scroll-behavior: smooth;
 }
 
 .display-dropdown {
