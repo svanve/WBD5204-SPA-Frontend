@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import Pikachu from '../IconComponents/Pikachu';
-import CreateChallenge from './CreateChallenge';
 
 const Card = (props) => {
 
