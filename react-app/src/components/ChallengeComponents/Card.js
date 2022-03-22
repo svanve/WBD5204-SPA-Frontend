@@ -4,6 +4,7 @@ import Pikachu from '../IconComponents/Pikachu';
 
 const Card = (props) => {
 
+    const [ modal, setModal ] = useState();
 
     return (
     <>
@@ -35,7 +36,7 @@ const Card = (props) => {
                         (props.filter === 'getMine') 
                         ? 
                         <>
-                            <button className="link-btn--div btn btn-secondary me-2 delete-btn">
+                            <button className="link-btn--div btn btn-secondary me-2 delete-btn" onClick={() => {props.setModal(true); props.setDeleteData(props);}}>
                                 <i className="far fa-trash-alt me-2"></i>
                                 <span className="delete-span">Löschen</span>
                             </button>

@@ -119,11 +119,28 @@
     }
 }
 
+.cancel-btn {
+    background-color: $lightgrey;
+
+    &:hover {
+        color: $white;
+        background-color: $grey !important;
+    }
+}
+
 .delete-btn {
     margin-bottom: 5px;
 
     &:hover {
         background-color: $danger !important;
+    }
+}
+
+.destroy-btn {
+    background-color: $danger;
+
+    &:hover {
+        background-color: $grey;
     }
 }
 

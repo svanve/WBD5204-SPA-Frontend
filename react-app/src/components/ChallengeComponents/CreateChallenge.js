@@ -12,13 +12,13 @@ const CreateChallenge = ({mode, values}) => {
     const [ question_id, setQuestion_id ] = useState('');
     const navigate = useNavigate();
 
-
     const data = {
         title: title,
         description: description,
         pokemon_id: pokemon_id,
         question_id: question_id
     }
+
 
     useEffect( () => {
         // put headerbar back in place after open overlay when page is scrolled down
@@ -103,6 +103,7 @@ const CreateChallenge = ({mode, values}) => {
         }
     }
 
+
     function handleEdit() {
         
         fetch( `http://localhost:8888/api/challenges/update/${values.cid}`, {
@@ -117,6 +118,7 @@ const CreateChallenge = ({mode, values}) => {
             .then( (data) => console.log(data))
             .catch( (err) => console.log(err))
     }
+    
 
     return (
     <>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../LayoutComponents/Header';
 import PlusIcon from '../IconComponents/PlusIcon';
 import CreateChallenge from './CreateChallenge';
+import DeleteModal from './DeleteModal';
 import Card from './Card';
 import ScrollTopBtn from './ScrollTopBtn';
 import { useNavigate } from 'react-router-dom';
@@ -18,22 +19,27 @@ const Challenges = (props) => {
     const [ filter, setFilter ] = useState( 'getCommunity' );
     const [ data, setData ] = useState( [] );
     const [ scrollToTop, setScrollToTop ] = useState(false);
+    const [ modal, setModal ] = useState(false);
+    const [ deleteData, setDeleteData ] = useState({});
     const navigate = useNavigate();
 
     useEffect( () => {
 
+        const token = localStorage.getItem( 'jwt' ); 
+
         fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`, {
-            // headers: {
-            //      credentials: 'include',
-            //      authorization: token
-            // }
+            headers: {
+                 credentials: 'include',
+                 authorization: token
+            }
         })
             .then(res => res.json())
             .then((data) => {
-                /* console.log(data); */
-                const dataArr = Object.values(data.result);
 
-                setData(dataArr);
+                if( data.success ) {
+                    const dataArr = Object.values(data.result);
+                    setData(dataArr);
+                }  
             })
             .catch(err=> console.log(err));
         
@@ -107,6 +113,8 @@ const Challenges = (props) => {
                         
                         {(Object.keys(edit).length !== 0) ? <CreateChallenge mode="edit" values={edit}></CreateChallenge> : <></>}
 
+                        {modal ? <DeleteModal setModal={setModal} setDeleteData={setDeleteData} values={deleteData}/> : <></>}
+
                         <div className="filterbar mb-2">
                             <div className="filter--sort-wrapper me-1" onClick={(e) => display(e)}>
                                 <div className="btn filter-btn filter--sort">
@@ -149,7 +157,9 @@ const Challenges = (props) => {
                                             pokemon={challenge.name}
                                             question={challenge.content}
                                             level={challenge.level}
-                                            reward={challenge.question_level}                                         
+                                            reward={challenge.question_level} 
+                                            setModal={setModal}  
+                                            setDeleteData={setDeleteData}                                       
                                         >
                                         </Card>
                                 )} )
