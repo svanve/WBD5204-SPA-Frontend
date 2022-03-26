@@ -22,8 +22,17 @@
 }
 
 .challenge-spec--author {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+
     span {
+        align-self: center;
         color: $highlight;
+    }
+
+    span:first-child {
+        margin-right: 5px;
     }
 }
 

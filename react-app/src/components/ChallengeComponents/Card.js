@@ -6,6 +6,15 @@ const Card = (props) => {
 
     const [ modal, setModal ] = useState();
 
+    const imgStyle = {
+        height: '30px',
+        width: '30px',
+        backgroundColor: 'black',
+        backgroundImage: `url("data:image/jpeg;base64, ${props.base64}")`,
+        backgroundSize: 'cover',
+        borderRadius: '50%'
+    }
+
     return (
     <>
         <div className="col-sm-6 col-md-4 col-xl-3 col-xxl-3">
@@ -26,6 +35,7 @@ const Card = (props) => {
                         <div className="challenge-spec col-7">
                             <h3 className="h3 card-title">{props.title}</h3>
                             <div className="challenge-spec--author">
+                                <span><div className="userpic-container" style={imgStyle}/></span>
                                 <span>{props.username}</span>
                             </div>
                             <p className="card-text">{props.description}</p>

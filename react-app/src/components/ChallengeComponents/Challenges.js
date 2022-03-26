@@ -25,19 +25,20 @@ const Challenges = (props) => {
 
     useEffect( () => {
 
-        const token = localStorage.getItem( 'jwt' ); 
+        // const token = localStorage.getItem( 'jwt' ); 
 
         fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`, {
-            headers: {
-                 credentials: 'include',
-                 authorization: token
-            }
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //  credentials: 'include',
+            //  authorization: token
+            // }
         })
             .then(res => res.json())
-            .then((data) => {
+            .then((dt) => {
 
-                if( data.success ) {
-                    const dataArr = Object.values(data.result);
+                if( dt.success ) {
+                    const dataArr = Object.values(dt.result);
                     setData(dataArr);
                 }  
             })
@@ -73,12 +74,12 @@ const Challenges = (props) => {
             method: 'PUT'
         })
         .then( (res) => res.json() )
-        .then( (data) => console.log(data))
+        .then( (dt) => console.log(dt))
         .catch( (err) => console.log(err))
 
-        if ( data.success ) {
-            navigate('/start');
-        }        
+        // if ( dt.success ) {
+        //     navigate('/start');
+        // }        
     }
      
     return (
@@ -153,6 +154,7 @@ const Challenges = (props) => {
                                             title={challenge.title}
                                             description={challenge.description}
                                             username={challenge.username}
+                                            base64={challenge.base64}
                                             filename={challenge.filename}
                                             pokemon={challenge.name}
                                             question={challenge.content}
