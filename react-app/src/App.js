@@ -7,7 +7,6 @@ import Register from './components/RegisterComponents/Register';
 import StartOne from './components/StartOne';
 import StartTwo from './components/StartTwo';
 import Footer from './components/Footer/Footer';
-import EffectHookExample from './components/UseEffectEx';
 
 import './styles/main.scss';
 
@@ -25,9 +24,6 @@ function App() {
               <Route path="/register" element={<Register/>} />
 
               <Route path="/challenges" element={<Challenges/>}></Route>
-
-              {/* Just an exercise: */}
-              <Route path="/useEffectHook" element={<EffectHookExample/>}/>
           </Routes>       
 
       </div>
