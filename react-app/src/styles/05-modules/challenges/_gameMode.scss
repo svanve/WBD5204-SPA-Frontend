@@ -1,0 +1,10 @@
+.game-mode--offset-layer {
+    height: 100vh;
+    width: 100vw;
+    background: $bg-color;
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+}
+

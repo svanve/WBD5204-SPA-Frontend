@@ -1,10 +1,6 @@
 import React, {useState} from 'react';
-import { NavLink } from 'react-router-dom';
-import Pikachu from '../IconComponents/Pikachu';
 
 const Card = (props) => {
-
-    const [ modal, setModal ] = useState();
 
     const imgStyle = {
         height: '30px',
@@ -12,7 +8,8 @@ const Card = (props) => {
         backgroundColor: 'black',
         backgroundImage: `url("data:image/jpeg;base64, ${props.base64}")`,
         backgroundSize: 'cover',
-        borderRadius: '50%'
+        borderRadius: '50%',
+        backgroundPositionY: '-4px'
     }
 
     return (
@@ -22,8 +19,7 @@ const Card = (props) => {
                 <div className="card-body">
                     <div className="card-body--wrap row mb-2">
                         <div className="poke-view col-5">
-                            <div className="poke-view--image">
-                                <Pikachu/>
+                            <div className="poke-view--image" dangerouslySetInnerHTML={{__html: props.svg}}>
                             </div>
                             <div className="poke-view--name">
                                 <span>{props.pokemon}</span>
@@ -38,7 +34,7 @@ const Card = (props) => {
                                 <span><div className="userpic-container" style={imgStyle}/></span>
                                 <span>{props.username}</span>
                             </div>
-                            <p className="card-text">{props.description}</p>
+                            <p className="card-text">{(props.description.length > 88) ? `${props.description.substring(0,88)}...` : props.description}</p>
                         </div>
                     </div>
 
@@ -58,12 +54,10 @@ const Card = (props) => {
 
                         </> 
                         :
-                        <NavLink to="/start" className="link-btn">
-                        <div className="link-btn--div btn btn-primary">
+                        <div className="link-btn--div btn btn-primary" onClick={() => props.setGameMode(true)}>
                             <i className="fas fa-bolt me-2"></i>
                             <span className="challenge-cta">Challenge!</span>
                         </div>
-                        </NavLink>
                     }
 
                 </div>
