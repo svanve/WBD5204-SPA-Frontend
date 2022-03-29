@@ -11,15 +11,35 @@
     border-radius: $border-radius;
 }
 
+.card-body--wrap {
+    max-height: 268px;
+}
+
 .card-text {
     font-size: $font-size-detail;
     color: $detail-color;
-    height: 109px;
 }
 
 .card-title {
     font-size: $font-size-subheadline;
 }
+
+.challenge-spec {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.challenge-spec::before {
+    content: "";
+    background: rgba(255,255,255,.2);
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    height: 50%;
+    width: 1px;
+  }
 
 .challenge-spec--author {
     display: flex;
@@ -48,6 +68,19 @@
     i, 
     span {
         font-size: $font-size-base;
+    }
+}
+
+.poke-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.poke-view--image {
+    svg {
+        width: 100%;
     }
 }
 
