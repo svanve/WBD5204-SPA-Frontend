@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const CreateChallenge = ({mode, values}) => {
+const CreateChallenge = ({mode, setModal, values}) => {
 
     const [ questions, setQuestions ] = useState([]);
     const [ pokemons, setPokemons ] = useState([]);    
@@ -21,28 +21,40 @@ const CreateChallenge = ({mode, values}) => {
 
 
     useEffect( () => {
-        // put headerbar back in place after open overlay when page is scrolled down
+        // put headerbar back in place to prevent overlay from showing white background at its top
         const cWrapper = document.querySelector('.challenges-wrapper');
         cWrapper.style.scrollBehavior = 'unset'; 
         cWrapper.scrollTo(0, 0);
         cWrapper.style.scrollBehavior = 'smooth';
 
+        // const token = localStorage.getItem( 'jwt' ); 
+
         // get all Questions
-        fetch( 'http://localhost:8888/api/questions/getQuestions' )
+        fetch( `${process.env.REACT_APP_BACKEND_URI}/api/questions/getQuestions`, {
+            // headers: {
+            //     'Content-Type':  'application/json',
+            //     'credentials':   'include',
+            //     'authorization': token
+            // }
+        })
             .then( (res) => res.json())
-            .then( (data) => {
-                
-                const q = Object.values(data.result);
+            .then( (dt) => {
+                const q = Object.values(dt.result);
                 setQuestions(q);
             })
             .catch( (err) => console.log(err))
 
         // get all Pokemons
-        fetch( 'http://localhost:8888/api/pokemons/getPokemons' )
+        fetch( `${process.env.REACT_APP_BACKEND_URI}/api/pokemons/getPokemons`, {
+            // headers: {
+            //     'Content-Type':  'application/json',
+            //     'credentials':   'include',
+            //     'authorization': token
+            // }
+        })
             .then( (res) => res.json())
-            .then( (data) => {
-                
-                const p = Object.values(data.result);
+            .then( (dt) => {
+                const p = Object.values(dt.result);
                 setPokemons(p);
             })
             .catch( (err) => console.log(err))
@@ -51,7 +63,7 @@ const CreateChallenge = ({mode, values}) => {
 
     
     useEffect( () => {
-        // setting values of challenge to be edited
+        // getting and setting values of challenge clicked to be edited
         if ( mode === 'edit' ) {
 
             if ( pokemons !== undefined && questions !== undefined ) {
@@ -72,20 +84,25 @@ const CreateChallenge = ({mode, values}) => {
         }
     }, [ pokemons, questions ] )
 
-
+    
     async function handleSubmit( e ) {
-        
-        e.preventDefault();
 
-        const body = JSON.stringify(data);
+        // const token = localStorage.getItem( 'jwt' );
+        const formData = new FormData();
+        for (const key in data) {
+            formData.append( key, data[key] )
+        }
+        console.log(formData);
 
-        console.log(body);
+        const body = formData;
 
-        const response = await fetch('http://localhost:8888/api/challenges/write', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/challenges/write`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            // headers: {
+            //     'Content-Type':  'application/json',
+            //     'credentials':   'include',
+            //     'authorization': token
+            // },
             body: body
         });
 
@@ -95,7 +112,7 @@ const CreateChallenge = ({mode, values}) => {
             navigate('/challenges');
         } else {
             
-            const errorsArray = Object.values(data.errors);
+            const errorsArray = Object.values(resData.errors);
 
             const errorsMerged = [].concat.apply([], errorsArray);
 
@@ -105,18 +122,27 @@ const CreateChallenge = ({mode, values}) => {
 
 
     function handleEdit() {
-        
-        fetch( `http://localhost:8888/api/challenges/update/${values.cid}`, {
+
+        // const token = localStorage.getItem( 'jwt' ); 
+        const body = JSON.stringify(data);
+
+        fetch( `${process.env.REACT_APP_BACKEND_URI}/api/challenges/update/${values.cid}`, {
                 method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
+                // headers: {
+                //     'Content-Type':  'application/json',
+                //     'credentials':   'include',
+                //     'authorization': token
+                // },
+                body: body
             }
         )
-            .then( (res) => res.json())
-            .then( (data) => console.log(data))
-            .catch( (err) => console.log(err))
+        .then( (res) => res.json())
+        .then( (dt) => {
+            if( dt.success ) {
+                setModal(false);
+            }
+        })
+        .catch( (err) => console.log(err))
     }
     
 
@@ -140,7 +166,7 @@ const CreateChallenge = ({mode, values}) => {
                         <select onChange={(e) => setPokemon_id(e.target.value)} value={pokemon_id} type="text" name="pokemon_id" id="challenge-pokemon-ip" className='form-select' aria-label="Default select example">
                         <option defaultValue disabled>Welches Pokémon soll herausgefordert werden?</option>
                             {pokemons.map( ( pokemon, index ) => {
-                                return <option value={pokemon.id} key={index} title={pokemon.name}>{pokemon.name}</option>;
+                                return <option value={pokemon.id} key={index} title={pokemon.name} onClick={(e) => setQuestion_id(pokemon.id)}>{pokemon.name}</option>;
                             })}
                         </select>
                     </div>
@@ -150,7 +176,7 @@ const CreateChallenge = ({mode, values}) => {
                         <select onChange={(e) => setQuestion_id(e.target.value)} value={question_id} type="text" name="question_id" id="challenge-question-ip" className='form-select' aria-label="Default select example">
                             <option defaultValue disabled className="text-muted">Wähle deine Frage</option>
                             {questions.map( ( question, index ) => {
-                                return <option value={question.id} key={index} title={question.content}>{question.content}</option>
+                                return <option value={question.id} key={index} title={question.content} onClick={(e) => setQuestion_id(question.id)}>{question.content}</option>
                             })}
                         </select> 
                     </div>

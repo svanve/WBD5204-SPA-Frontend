@@ -22,23 +22,28 @@ const Register = (props) => {
     async function onSubmitHandler( e ) {
         e.preventDefault();
 
-
+        // const token = localStorage.getItem( 'jwt' ); 
         const formData = new FormData();
 
         for (const key in formdata) {
             formData.append( key, formdata[key] )
         }
 
-        const response = await fetch( 'http://localhost:8888/api/user/register', {
+        const response = await fetch( `${process.env.REACT_APP_BACKEND_URI}/api/user/register`, {
             method: 'POST',
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //     'credentials': 'include',
+            //     'authorization': token
+            // },            
             body: formData
         })
 
         const data = await response.json();
         
 
-        if ( response.status === 200 ) {
-            // output success message
+        if ( response.status === 201 ) {
+            // TODO: output success message
 
             // show challenges
             navigate('/challenges');

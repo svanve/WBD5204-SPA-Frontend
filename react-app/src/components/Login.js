@@ -25,29 +25,27 @@ const Login = (props) => {
             formData.append( key, formdata[key] )
         }
 
-        const response = await fetch( 'http://localhost:8888/api/user/login', {
+        const response = await fetch( `${process.env.REACT_APP_BACKEND_URI}/api/user/login`, {
             method: 'POST',
             body: formData
         })
 
-        const data = await response.json();
+        const resData = await response.json();
         
 
-        if ( data.success ) {
-
-            // read documentation to authorization header problem
-            localStorage.setItem( 'jwt', 'AUTHORIZE ' + data.jwt );   
+        if ( resData.success ) {
+            // read documentation about authorization header problem
+            localStorage.setItem( 'jwt', 'AUTHORIZE ' + resData.jwt );   
             console.log(document.cookie);
             navigate('/challenges');
         } else {
             
-            for (const key in data.errors) {
-                setError(data.errors[key][0]);
+            for (const key in resData.errors) {
+                setError( resData.errors[key][0]);
             }
         }
 
     }
-
 
 
     return (

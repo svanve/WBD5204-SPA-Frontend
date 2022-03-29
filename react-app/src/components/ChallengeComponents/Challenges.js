@@ -5,9 +5,9 @@ import CreateChallenge from './CreateChallenge';
 import DeleteModal from './DeleteModal';
 import Card from './Card';
 import ScrollTopBtn from './ScrollTopBtn';
+import GameMode from './GameMode';
 import { useNavigate } from 'react-router-dom';
 
-// import XHR from '../../XHR'; // Read documentation about auhtorization header problem
 
 const Challenges = (props) => {
     // const {} = props;
@@ -21,17 +21,20 @@ const Challenges = (props) => {
     const [ scrollToTop, setScrollToTop ] = useState(false);
     const [ modal, setModal ] = useState(false);
     const [ deleteData, setDeleteData ] = useState({});
+    const [ gameMode, setGameMode ] = useState(false);
     const navigate = useNavigate();
 
     useEffect( () => {
 
+        // get Challenges
+        
         // const token = localStorage.getItem( 'jwt' ); 
 
-        fetch( `http://localhost:8888/api/challenges/${filter}/${sort}`, {
+        fetch( `${process.env.REACT_APP_BACKEND_URI}/api/challenges/${filter}/${sort}`, {
             // headers: {
-            //     'Content-Type': 'application/json',
-            //  credentials: 'include',
-            //  authorization: token
+            //     'Content-Type':  'application/json',
+            //     'credentials':   'include',
+            //     'authorization': token
             // }
         })
             .then(res => res.json())
@@ -69,17 +72,27 @@ const Challenges = (props) => {
     }
 
     function logout() {
+
+        // const token = localStorage.removeItem( 'jwt' ); 
+
         //logout
-        fetch( 'http://localhost:8888/api/user/logout', {
-            method: 'PUT'
+        fetch( `${process.env.REACT_APP_BACKEND_URI}/api/user/logout`, {
+            method: 'PUT',
+            // headers: {
+            //     'Content-Type':  'application/json',
+            //     'credentials':   'include',
+            //     'authorization': token
+            // }
         })
         .then( (res) => res.json() )
-        .then( (dt) => console.log(dt))
-        .catch( (err) => console.log(err))
-
-        // if ( dt.success ) {
-        //     navigate('/start');
-        // }        
+        .then( (dt) => {
+            // if ( dt.success ) {
+            //     navigate('/start');
+            // } else {
+            //     throw 'Logout hat nicht funktioniert';
+            // }
+        })
+        .catch( (err) => console.log(err))        
     }
      
     return (
@@ -110,11 +123,13 @@ const Challenges = (props) => {
                 <main>
                     <div className="content-view">
 
-                        {create ? <CreateChallenge mode="create"></CreateChallenge> : <></>}
+                        {create ? <CreateChallenge mode="create" setModal={setModal}></CreateChallenge> : <></>}
                         
-                        {(Object.keys(edit).length !== 0) ? <CreateChallenge mode="edit" values={edit}></CreateChallenge> : <></>}
+                        {(Object.keys(edit).length !== 0) ? <CreateChallenge mode="edit" values={edit} setModal={setModal}></CreateChallenge> : <></>}
 
                         {modal ? <DeleteModal setModal={setModal} setDeleteData={setDeleteData} values={deleteData}/> : <></>}
+
+                        { gameMode ? <GameMode setGameMode={setGameMode} /> : <></> }
 
                         <div className="filterbar mb-2">
                             <div className="filter--sort-wrapper me-1" onClick={(e) => display(e)}>
@@ -157,11 +172,13 @@ const Challenges = (props) => {
                                             base64={challenge.base64}
                                             filename={challenge.filename}
                                             pokemon={challenge.name}
+                                            svg={challenge.svg}
                                             question={challenge.content}
                                             level={challenge.level}
                                             reward={challenge.question_level} 
                                             setModal={setModal}  
                                             setDeleteData={setDeleteData}                                       
+                                            setGameMode={setGameMode} 
                                         >
                                         </Card>
                                 )} )
