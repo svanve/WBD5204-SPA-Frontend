@@ -1,13 +1,13 @@
-// @import 'menu-main';
 
+@import 'layout/blackDropback';
 @import 'challenges/card';
 @import 'challenges/challenges';
 @import 'challenges/createChallenge';
 @import 'challenges/gameMode';
 @import 'challenges/scrollTopBtn';
-@import 'challenges/modal';
+@import 'layout/modal';
 @import 'footer';
-@import 'layout';
+@import 'layout/layout';
 @import 'login';
 @import 'register';
 @import 'registerDropzone';

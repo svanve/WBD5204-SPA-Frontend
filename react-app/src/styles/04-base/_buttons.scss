@@ -98,6 +98,8 @@
     border: none;
     font-size: $font-size-btn-cta;
     border-radius: $border-radius;
+    white-space: normal;
+    word-break: break-word;
 
     a {
         color: $white;

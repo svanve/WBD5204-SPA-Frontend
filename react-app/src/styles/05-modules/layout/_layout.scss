@@ -88,7 +88,8 @@ main {
     justify-content: center;
     padding: 0 2% 0 2%;
     cursor: pointer;
-    transition: all $easing-in-out;
+    transition: $easing-in-out;
+    overflow: hidden;
 
     &:hover {
         background-color: $hover-black;
@@ -107,5 +108,10 @@ main {
     .menu-option--label  {
         text-align: center;
         color: $lightgrey;
+    }
+
+    .menu-option--label {
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 }

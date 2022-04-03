@@ -6,7 +6,8 @@ import DeleteModal from './DeleteModal';
 import Card from './Card';
 import ScrollTopBtn from './ScrollTopBtn';
 import GameMode from './GameMode';
-import { useNavigate } from 'react-router-dom';
+import BlackDropback from '../LayoutComponents/BlackDropback';
+// import { useNavigate } from 'react-router-dom';
 
 
 const Challenges = (props) => {
@@ -22,7 +23,9 @@ const Challenges = (props) => {
     const [ modal, setModal ] = useState(false);
     const [ deleteData, setDeleteData ] = useState({});
     const [ gameMode, setGameMode ] = useState(false);
-    const navigate = useNavigate();
+    const [ gameData, setGameData ] = useState({});
+    const [ time, setTime ] = useState(false);
+    // const navigate = useNavigate();
 
     useEffect( () => {
 
@@ -94,6 +97,26 @@ const Challenges = (props) => {
         })
         .catch( (err) => console.log(err))        
     }
+
+    // FREMDCODE StackOverflow:
+    function shuffle(array) {
+        let currentIndex = array.length,  randomIndex;
+        
+        // While there remain elements to shuffle...
+        while (currentIndex !== 0) {
+        
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
+        
+            // And swap it with the current element.
+            [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
+        
+        return array;
+    }
+    
      
     return (
         <>
@@ -127,9 +150,9 @@ const Challenges = (props) => {
                         
                         {(Object.keys(edit).length !== 0) ? <CreateChallenge mode="edit" values={edit} setModal={setModal}></CreateChallenge> : <></>}
 
-                        {modal ? <DeleteModal setModal={setModal} setDeleteData={setDeleteData} values={deleteData}/> : <></>}
+                        {modal ? <> <DeleteModal setModal={setModal} setDeleteData={setDeleteData} values={deleteData}/><BlackDropback/> </> : <></>}
 
-                        { gameMode ? <GameMode setGameMode={setGameMode} /> : <></> }
+                        {gameMode ? <GameMode gameData={gameData} time={time} setTime={setTime} setGameMode={setGameMode} /> : <></>}
 
                         <div className="filterbar mb-2">
                             <div className="filter--sort-wrapper me-1" onClick={(e) => display(e)}>
@@ -164,7 +187,6 @@ const Challenges = (props) => {
                                         <Card 
                                             key={challenge.id}
                                             cid={challenge.id}
-                                            setEdit={setEdit} 
                                             filter={filter} 
                                             title={challenge.title}
                                             description={challenge.description}
@@ -172,13 +194,19 @@ const Challenges = (props) => {
                                             base64={challenge.base64}
                                             filename={challenge.filename}
                                             pokemon={challenge.name}
+                                            level={challenge.level}
                                             svg={challenge.svg}
                                             question={challenge.content}
-                                            level={challenge.level}
+                                            answerArr={shuffle([challenge.right_answer, challenge.wrong_answer_1, challenge.wrong_answer_2, challenge.wrong_answer_3])}
+                                            rightA={challenge.right_answer}
                                             reward={challenge.question_level} 
+                                            setEdit={setEdit}
                                             setModal={setModal}  
                                             setDeleteData={setDeleteData}                                       
                                             setGameMode={setGameMode} 
+                                            setGameData={setGameData}
+                                            setTime={setTime}
+                                            time={time}
                                         >
                                         </Card>
                                 )} )

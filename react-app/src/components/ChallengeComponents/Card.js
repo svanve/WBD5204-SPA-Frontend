@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const Card = (props) => {
 
@@ -54,7 +54,7 @@ const Card = (props) => {
 
                         </> 
                         :
-                        <div className="link-btn--div btn btn-primary" onClick={() => props.setGameMode(true)}>
+                        <div className="link-btn--div btn btn-primary"  onClick={() => {props.setGameMode(true); props.setGameData(props); props.setTime(true)}}>
                             <i className="fas fa-bolt me-2"></i>
                             <span className="challenge-cta">Challenge!</span>
                         </div>

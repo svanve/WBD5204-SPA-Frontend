@@ -41,7 +41,7 @@
     height: auto;
     padding: 0 0 10px 0;
     margin-top: 8px;
-    transition: all $easing-in-out;
+    transition: $easing-in-out;
 
     &:hover {
         background-color: $hover-black;
