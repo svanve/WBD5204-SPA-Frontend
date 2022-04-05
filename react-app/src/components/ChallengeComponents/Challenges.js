@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+// import { useNavigate } from 'react-router-dom';
+
 import Header from '../LayoutComponents/Header';
-import PlusIcon from '../IconComponents/PlusIcon';
 import CreateChallenge from './CreateChallenge';
 import DeleteModal from './DeleteModal';
 import Card from './Card';
-import ScrollTopBtn from './ScrollTopBtn';
+import ScrollTopBtn from '../IconComponents/ScrollTopBtn';
 import GameMode from './GameMode';
 import BlackDropback from '../LayoutComponents/BlackDropback';
-// import { useNavigate } from 'react-router-dom';
 
+import { Context } from '../../helpers/Context'; 
 
 const Challenges = (props) => {
     // const {} = props;
 
-    const [ create, setCreate ] = useState(false);
-    const [ edit, setEdit ] = useState({});
-    const [ topBtn, setTopBtn ] = useState(false);
+    const { create, edit, setEdit, topBtn, scrollToTop, setScrollToTop, handleTopBtn } = useContext(Context);
     const [ sort, setSort ] = useState( 'id' );
     const [ filter, setFilter ] = useState( 'getCommunity' );
     const [ data, setData ] = useState( [] );
-    const [ scrollToTop, setScrollToTop ] = useState(false);
     const [ modal, setModal ] = useState(false);
     const [ deleteData, setDeleteData ] = useState({});
     const [ gameMode, setGameMode ] = useState(false);
@@ -55,47 +53,15 @@ const Challenges = (props) => {
     useEffect ( () => {
 
         if (scrollToTop) {
-            document.querySelector('.challenges-wrapper').scrollTo(0, 0);
+            document.querySelector('.page-wrapper').scrollTo(0, 0);
             setScrollToTop(false);
         };
 
-    }, [ scrollToTop ])
+    }, [ scrollToTop, setScrollToTop ])
 
 
     function display(e) {
         e.currentTarget.children[1].classList.toggle('display-dropdown');
-    }
-
-    function handleTopBtn(e) {
-        if ( e.target.scrollTop === 0 ) {
-            setTopBtn(false);
-        } else { 
-            setTopBtn(true);
-        }
-    }
-
-    function logout() {
-
-        // const token = localStorage.removeItem( 'jwt' ); 
-
-        //logout
-        fetch( `${process.env.REACT_APP_BACKEND_URI}/api/user/logout`, {
-            method: 'PUT',
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // }
-        })
-        .then( (res) => res.json() )
-        .then( (dt) => {
-            // if ( dt.success ) {
-            //     navigate('/start');
-            // } else {
-            //     throw 'Logout hat nicht funktioniert';
-            // }
-        })
-        .catch( (err) => console.log(err))        
     }
 
     // FREMDCODE StackOverflow:
@@ -120,29 +86,10 @@ const Challenges = (props) => {
      
     return (
         <>
-            <div className="challenges-wrapper" onScroll={(e) => handleTopBtn(e)}>
+            <div className="page-wrapper" onScroll={(e) => handleTopBtn(e)}>
                 
-                <Header>
-                    <h1>Challenges</h1>
-                    {
-                        ( !create && Object.keys(edit).length === 0 ) ? 
-                            <>
-                                <div className="header-button--wrapper">
-                                    <div className="header-button" onClick={() => {setCreate(true); document.querySelector('body').style.overflowY = 'hidden'}}>
-                                        <PlusIcon />
-                                    </div>
-                                    <div className="header-button header-button--create" onClick={() => logout()}>
-                                        <i className="fas fa-sign-out-alt" title="Logout"></i>
-                                    </div>
-                                </div>
-                            </> : 
-                            <>
-                                <div className="header-button" onClick={() => {setCreate(false); setEdit({}); document.querySelector('body').style.overflowY = 'hidden'}}>
-                                    <span className='fas fa-times button-close'></span>
-                                </div>
-                            </>
-                    }
-                </Header>
+                <Header pageTitle="Challenges"/>
+
                 <main>
                     <div className="content-view">
 
