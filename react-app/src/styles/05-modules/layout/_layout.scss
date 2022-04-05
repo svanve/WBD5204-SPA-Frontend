@@ -1,3 +1,11 @@
+.active {
+    background-color: $hover-black;
+
+    i, span {
+        color: $highlight !important;
+    }
+}
+
 .content {
     min-height: 100vh;
     flex: 1 0 auto;
@@ -114,4 +122,11 @@ main {
         text-overflow: ellipsis;
         overflow: hidden;
     }
+}
+
+.page-wrapper {
+    height: 100vh;
+    overflow-y: scroll;
+    background-color: $grey;
+    scroll-behavior: smooth;
 }
