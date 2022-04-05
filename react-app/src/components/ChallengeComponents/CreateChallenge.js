@@ -8,8 +8,8 @@ const CreateChallenge = ({mode, setModal, values}) => {
     
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
-    const [ pokemon_id, setPokemon_id ] = useState('');
-    const [ question_id, setQuestion_id ] = useState('');
+    const [ pokemon_id, setPokemon_id ] = useState(1);
+    const [ question_id, setQuestion_id ] = useState(1);
     const navigate = useNavigate();
 
     const data = {
@@ -22,10 +22,11 @@ const CreateChallenge = ({mode, setModal, values}) => {
 
     useEffect( () => {
         // put headerbar back in place to prevent overlay from showing white background at its top
-        const cWrapper = document.querySelector('.challenges-wrapper');
+        const cWrapper = document.querySelector('.page-wrapper');
         cWrapper.style.scrollBehavior = 'unset'; 
         cWrapper.scrollTo(0, 0);
         cWrapper.style.scrollBehavior = 'smooth';
+
 
         // const token = localStorage.getItem( 'jwt' ); 
 
@@ -58,7 +59,6 @@ const CreateChallenge = ({mode, setModal, values}) => {
                 setPokemons(p);
             })
             .catch( (err) => console.log(err))
-
     }, [])
 
     
@@ -86,15 +86,14 @@ const CreateChallenge = ({mode, setModal, values}) => {
 
     
     async function handleSubmit( e ) {
+        e.preventDefault();
 
         // const token = localStorage.getItem( 'jwt' );
         const formData = new FormData();
+        
         for (const key in data) {
             formData.append( key, data[key] )
         }
-        console.log(formData);
-
-        const body = formData;
 
         const response = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/challenges/write`, {
             method: 'POST',
@@ -103,7 +102,7 @@ const CreateChallenge = ({mode, setModal, values}) => {
             //     'credentials':   'include',
             //     'authorization': token
             // },
-            body: body
+            body: formData
         });
 
         const resData = await response.json();
@@ -150,7 +149,7 @@ const CreateChallenge = ({mode, setModal, values}) => {
     <>
         <div id="create-offset-layer">
             <div id="create-form-wrapper">
-                <form id="create-form" method='post' noValidate onSubmit={(e) => handleSubmit(e)}>
+                <form id="create-form" noValidate onSubmit={(e) => handleSubmit(e)}>
                     <div className="form-group create-form-group">
                         <label htmlFor="challenge-title-ip">Titel</label>
                         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="challenge-title-ip" className='form-control' placeholder='Mein Beispieltitel'/>
