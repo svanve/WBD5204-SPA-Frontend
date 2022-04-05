@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import BackIcon from './IconComponents/BackIcon';
 import { NavLink, useNavigate } from 'react-router-dom';
+
+import BackIcon from './IconComponents/BackIcon';
 
 const Login = (props) => {
     // const {} = props;
@@ -34,9 +35,9 @@ const Login = (props) => {
         
 
         if ( resData.success ) {
-            // read documentation about authorization header problem
-            localStorage.setItem( 'jwt', 'AUTHORIZE ' + resData.jwt );   
-            console.log(document.cookie);
+            // read documentation about http problem
+            // localStorage.setItem( 'jwt', 'AUTHORIZE ' + resData.jwt );   
+
             navigate('/challenges');
         } else {
             
