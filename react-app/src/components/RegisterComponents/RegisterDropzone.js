@@ -30,7 +30,7 @@ const RegisterDropzone = ({ formdata, setFormdata }) => {
       const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
 
     return (
-    <div className='form-group'>
+    <div className='form-group form-picture'>
         <label className='mb-3'>Profilbild hochladen</label>
         <p className='dropzone-explain-p'>Drag 'n Drop oder Klick</p>
         <div className="profile-pic-container" {...getRootProps()}>
