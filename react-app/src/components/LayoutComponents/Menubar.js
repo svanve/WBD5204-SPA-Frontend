@@ -12,11 +12,11 @@ const Menubar = (props) => {
                 </div>
                 <span className="menu-option--label">Challenges</span>
             </NavLink>
-            <NavLink to='/pokemon' className="menu-option">
+            <NavLink to='/pokemons' className="menu-option">
                 <div className="menu-option--icon">
                     <i className='fas fa-dragon'></i>
                 </div>
-                <span className="menu-option--label">Pokémon</span>
+                <span className="menu-option--label">Pokémons</span>
             </NavLink>
             <NavLink to='/pokeshop' className="menu-option">
                 <div className="menu-option--icon">
@@ -24,11 +24,11 @@ const Menubar = (props) => {
                 </div>
                 <span className="menu-option--label">PokéShop</span>
             </NavLink>
-            <NavLink to='/einstellungen' className="menu-option">
+            <NavLink to='/profile' className="menu-option">
                 <div className="menu-option--icon">
-                    <i className='fas fa-cog'></i>
+                    <i className="fas fa-user"></i>
                 </div>
-                <span className="menu-option--label">Einstellungen</span>
+                <span className="menu-option--label">Mein Profil</span>
             </NavLink>
         </div>
     </>
