@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import MewtoIcon from './IconComponents/MewtoIcon';
 import PokeballIcon from './IconComponents/PokeballIcon';
 import ProfEichIcon from './IconComponents/ProfEichIcon';
 
-const startOne = () => {
+const StartOne = () => {
     // const {} = props;
 
     return (
@@ -60,4 +60,4 @@ const startOne = () => {
     ); 
 }
 
-export default startOne;
+export default StartOne;
