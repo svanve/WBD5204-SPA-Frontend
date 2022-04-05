@@ -1,28 +1,20 @@
-// .btn {
-//     background-color: #ccc;
-//     border: none;
-//     border-radius: 0;
-//     padding: 1rem 1.5rem;
-//     letter-spacing: 1px;
-//     border: 3px solid $color-4;
-//     font-size: $font-size-base;
-//     font-weight: bold;
-//   }
-  
-//   .button-send {
-//     background-color: $color-4;
-//     color: white;
-//     &:focus,
-//     &:hover {
-//       background-color: white;
-//       border: 3px solid $color-4;
-//       color: $color-4;
-//     }
-//   }
+.btn {
+    width: 100%;
+    border: none;
+    font-size: $font-size-btn-cta;
+    border-radius: $border-radius;
+    white-space: normal;
+    word-break: break-word;
+    box-shadow: 0px 1px 10px rgb(0 0 0 / 30%);
 
+    a {
+        color: $white;
+    }
+}
+        
 .btn-primary {
     background-color: $primary;
-    transition: all .25s ease-in-out;
+    transition: $easing-in-out;
 
     &:hover {
         background-color: $primary-hover;
@@ -93,18 +85,6 @@
     margin-bottom: 40px;
 }
 
-.btn {
-    width: 100%;
-    border: none;
-    font-size: $font-size-btn-cta;
-    border-radius: $border-radius;
-    white-space: normal;
-    word-break: break-word;
-
-    a {
-        color: $white;
-    }
-}
 
 .button-close {
     color: white;
