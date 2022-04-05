@@ -1,5 +1,8 @@
 #m-register {
 
+    overflow: scroll;
+    height: 100vh;
+
     h1 {
         margin-top: 40px    ;
         transition: $easing-in-out;
