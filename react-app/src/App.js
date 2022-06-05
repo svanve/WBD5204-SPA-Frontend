@@ -22,6 +22,7 @@ function App() {
   const [ edit, setEdit ] = useState({});
   const [ topBtn, setTopBtn ] = useState(false);
   const [ scrollToTop, setScrollToTop ] = useState(false);
+  const [ loggedIn, setLoggedIn ] = useState(false);
 
   function handleTopBtn(e) {
     if ( e.target.scrollTop === 0 ) {
@@ -35,7 +36,7 @@ function App() {
     <Router>
       <div className="content">
 
-          <Context.Provider value={{ create, setCreate, edit, setEdit, topBtn, setTopBtn, scrollToTop, setScrollToTop, handleTopBtn }}>
+          <Context.Provider value={{ create, setCreate, edit, setEdit, topBtn, setTopBtn, scrollToTop, setScrollToTop, handleTopBtn, loggedIn, setLoggedIn }}>
               <Routes>
                   <Route path="/" element={<StartOne/>} />
                   <Route path="/start" element={<StartTwo/>} />
