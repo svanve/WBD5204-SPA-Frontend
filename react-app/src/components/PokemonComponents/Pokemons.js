@@ -13,13 +13,13 @@ const Pokemons = () => {
     const { create, edit, scrollToTop, setScrollToTop, topBtn, handleTopBtn } = useContext(Context);
 
     useEffect( () => {
+        const token = localStorage.getItem( 'jwt' );
+
         // get all Pokemons
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/pokemons/getPokemons`, {
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // }
+            headers: {
+                'authorization': token
+            }
         })
             .then( (res) => res.json())
             .then( (dt) => {
@@ -36,7 +36,7 @@ const Pokemons = () => {
             setScrollToTop(false);
         };
 
-    }, [ scrollToTop ])
+    }, [ setScrollToTop, scrollToTop ])
 
     return (
         <>
