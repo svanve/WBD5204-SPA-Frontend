@@ -1,10 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import BackIcon from './IconComponents/BackIcon';
+import { Context } from '../helpers/Context';
 
 const Login = (props) => {
     // const {} = props;
+
+    const { setLoggedIn, loggedIn } = useContext( Context);
     const navigate = useNavigate();
     const [ error, setError ] = useState('');
 
@@ -12,10 +15,6 @@ const Login = (props) => {
         username: '',
         password: ''
     } );
-
-    useEffect( () => {
-        
-    }, [error]);
 
     async function submitHandler(e) {
         e.preventDefault();
@@ -35,8 +34,9 @@ const Login = (props) => {
         
 
         if ( resData.success ) {
-            // read documentation about http problem
-            // localStorage.setItem( 'jwt', 'AUTHORIZE ' + resData.jwt );   
+            localStorage.setItem( 'jwt', 'AUTHORIZE ' + resData.jwt ); 
+
+            setLoggedIn(true);
 
             navigate('/challenges');
         } else {
