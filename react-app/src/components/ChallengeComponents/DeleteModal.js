@@ -5,16 +5,19 @@ const DeleteModal = (props) => {
     function deleteChallenge(challenge_id) {
         console.log(challenge_id);
 
-        // const token = localStorage.getItem( 'jwt' ); 
+        const token = localStorage.getItem( 'jwt' ); 
         
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/challenges/delete/${challenge_id}`, {
             method: 'DELETE',
-            // headers: {
-            //     'Content-Type': 'application/json',
-            //     'credentials': 'include',
-            //     'authorization': token
-            // }
+            headers: {
+                'authorization': token
+            }
         })
+            .then(res => res.json())
+            .then(dt => {
+                console.log('SUCCESS');
+            })
+            .catch(err => console.log(err, 'FAIL'))
     }
 
     return (

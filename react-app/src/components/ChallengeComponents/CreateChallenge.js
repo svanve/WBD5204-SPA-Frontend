@@ -21,22 +21,19 @@ const CreateChallenge = ({mode, setModal, values}) => {
 
 
     useEffect( () => {
-        // put headerbar back in place to prevent overlay from showing white background at its top
+        // put headerbar back in place to prevent overlay from showing white background at its top (scroll 0%)
         const cWrapper = document.querySelector('.page-wrapper');
         cWrapper.style.scrollBehavior = 'unset'; 
         cWrapper.scrollTo(0, 0);
         cWrapper.style.scrollBehavior = 'smooth';
 
-
-        // const token = localStorage.getItem( 'jwt' ); 
+        const token = localStorage.getItem( 'jwt' ); 
 
         // get all Questions
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/questions/getQuestions`, {
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // }
+            headers: {
+                'authorization': token
+            }
         })
             .then( (res) => res.json())
             .then( (dt) => {
@@ -47,11 +44,9 @@ const CreateChallenge = ({mode, setModal, values}) => {
 
         // get all Pokemons
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/pokemons/getPokemons`, {
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // }
+            headers: {
+                'authorization': token
+            }
         })
             .then( (res) => res.json())
             .then( (dt) => {
@@ -63,7 +58,7 @@ const CreateChallenge = ({mode, setModal, values}) => {
 
     
     useEffect( () => {
-        // getting and setting values of challenge clicked to be edited
+        // getting and setting values of the clicked challenge in order to let user edit them
         if ( mode === 'edit' ) {
 
             if ( pokemons !== undefined && questions !== undefined ) {
@@ -85,53 +80,87 @@ const CreateChallenge = ({mode, setModal, values}) => {
     }, [ pokemons, questions ] )
 
     
-    async function handleSubmit( e ) {
+    function handleSubmit( e ) {
         e.preventDefault();
 
-        // const token = localStorage.getItem( 'jwt' );
+        // if ( !loggedIn ) {
+        //     return;
+        // }
+
+        const token = localStorage.getItem( 'jwt' );
         const formData = new FormData();
         
         for (const key in data) {
             formData.append( key, data[key] )
         }
 
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/challenges/write`, {
+        fetch(`${process.env.REACT_APP_BACKEND_URI}/api/challenges/write`, {
             method: 'POST',
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // },
+            headers: {
+                'authorization': token
+            },
             body: formData
-        });
+        })
+            .then( res => res.json())
+            .then( (dt) => { 
+                
+            } )
+            .catch( err => {
+                const errorsArray = Object.values(err);
 
-        const resData = await response.json();
+                const errorsMerged = [].concat.apply([], errorsArray);
 
-        if ( resData.status === 200 ) {
-            navigate('/challenges');
-        } else {
-            
-            const errorsArray = Object.values(resData.errors);
-
-            const errorsMerged = [].concat.apply([], errorsArray);
-
-            console.log(errorsMerged);
-        }
+                console.log(errorsMerged);
+            })        
     }
+
+    // async function handleSubmit( e ) {
+    //     e.preventDefault();
+
+    //     const token = localStorage.getItem( 'jwt' );
+    //     const formData = new FormData();
+        
+    //     for (const key in data) {
+    //         formData.append( key, data[key] )
+    //     }
+
+
+    //     const response = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/challenges/write`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'authorization': token
+    //         },
+    //         body: formData
+    //     });
+
+    //     const resData = await response.json();
+
+    //     if ( resData.success ) {
+
+    //         navigate('/challenges');
+    //     } else {
+            
+    //         const errorsArray = Object.values(resData.errors);
+
+    //         const errorsMerged = [].concat.apply([], errorsArray);
+
+    //         console.log(errorsMerged);
+    //     }
+    // }
 
 
     function handleEdit() {
 
-        // const token = localStorage.getItem( 'jwt' ); 
+        const token = localStorage.getItem( 'jwt' ); 
         const body = JSON.stringify(data);
+
+        console.log(body);
 
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/challenges/update/${values.cid}`, {
                 method: 'PUT',
-                // headers: {
-                //     'Content-Type':  'application/json',
-                //     'credentials':   'include',
-                //     'authorization': token
-                // },
+                headers: {
+                    'authorization': token
+                },
                 body: body
             }
         )

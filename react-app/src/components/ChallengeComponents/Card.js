@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Context } from '../../helpers/Context';
+
 
 const Card = (props) => {
+
+    const { loggedIn } = useContext(Context);
+    const navigate = useNavigate();
 
     const imgStyle = {
         height: '30px',
@@ -54,7 +61,14 @@ const Card = (props) => {
 
                         </> 
                         :
-                        <div className="link-btn--div btn btn-primary"  onClick={() => {props.setGameMode(true); props.setGameData(props); props.setTime(true)}}>
+                        <div className="link-btn--div btn btn-primary"  onClick={() => { 
+
+                                if(loggedIn) { 
+                                    props.setGameMode(true); props.setGameData(props); props.setTime(true); 
+                                    } else {
+                                        navigate('/start');
+                                    }
+                                }}>
                             <i className="fas fa-bolt me-2"></i>
                             <span className="challenge-cta">Challenge!</span>
                         </div>

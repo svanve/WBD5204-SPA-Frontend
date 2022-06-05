@@ -29,24 +29,19 @@ const Challenges = (props) => {
 
         // get Challenges
         
-        // const token = localStorage.getItem( 'jwt' ); 
+        const token = localStorage.getItem( 'jwt' ); 
 
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/challenges/${filter}/${sort}`, {
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // }
+            headers: {
+                'authorization': token
+            }
         })
             .then(res => res.json())
             .then((dt) => {
-
-                if( dt.success ) {
-                    const dataArr = Object.values(dt.result);
-                    setData(dataArr);
-                }  
+                const dataArr = Object.values(dt.result);
+                setData(dataArr);
             })
-            .catch(err=> console.log(err));
+            .catch(err=> console.log(err, 'FAIL'));
         
     }, [ sort, filter ] );
 
