@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import Menubar from './Menubar';
 import PlusIcon from '../IconComponents/PlusIcon';
 
@@ -7,7 +9,8 @@ import { logout } from '../../helpers/Helpers';
 
 const Header = ({pageTitle}) => {
 
-    const { create, setCreate, edit, setEdit } = useContext(Context);
+    const { create, setCreate, edit, setEdit, setLoggedIn, loggedIn } = useContext(Context);
+    const navigate = useNavigate();
 
     return (
     <>
@@ -22,7 +25,12 @@ const Header = ({pageTitle}) => {
                                         <div className="header-button" onClick={() => {setCreate(true); document.querySelector('body').style.overflowY = 'hidden'}}>
                                             <PlusIcon />
                                         </div>
-                                        <div className="header-button header-button--create" onClick={() => logout()}>
+                                        <div className="header-button header-button--create" onClick={() => {
+                                                if( logout ) {
+                                                    setLoggedIn(false);
+                                                    navigate('/start');
+                                                } 
+                                        }}>
                                             <i className="fas fa-sign-out-alt" title="Logout"></i>
                                         </div>
                                     </div>
