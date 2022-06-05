@@ -1,23 +1,17 @@
 
+
 export function logout() {
-    // const token = localStorage.removeItem( 'jwt' ); 
+    localStorage.removeItem( 'jwt' ); 
 
     //logout
     fetch( `${process.env.REACT_APP_BACKEND_URI}/api/user/logout`, {
-        method: 'PUT',
-        // headers: {
-        //     'Content-Type':  'application/json',
-        //     'credentials':   'include',
-        //     'authorization': token
-        // }
+        method: 'PUT'
     })
-        .then( (res) => res.json() )
-        .then( (dt) => {
-            // if ( dt.success ) {
-            //     navigate('/start');
-            // } else {
-            //     throw 'Logout hat nicht funktioniert';
-            // }
+        .then( dt => {
+            console.log('SUCCESS');
+            return true;
         })
-        .catch( (err) => console.log(err))
+        .catch( (err) => console.log(err) )
 }
+
+
