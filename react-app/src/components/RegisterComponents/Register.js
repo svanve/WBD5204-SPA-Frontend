@@ -41,7 +41,8 @@ const Register = (props) => {
         
 
         if ( response.status === 201 ) {
-            // TODO: output success message
+            // output success message could be here
+            console.log(response);
 
             // show challenges
             navigate('/challenges');

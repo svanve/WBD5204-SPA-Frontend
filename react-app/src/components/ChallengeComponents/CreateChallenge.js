@@ -83,12 +83,10 @@ const CreateChallenge = ({mode, setModal, values}) => {
     function handleSubmit( e ) {
         e.preventDefault();
 
-        // if ( !loggedIn ) {
-        //     return;
-        // }
-
+        
         const token = localStorage.getItem( 'jwt' );
         const formData = new FormData();
+        
         
         for (const key in data) {
             formData.append( key, data[key] )
@@ -114,60 +112,32 @@ const CreateChallenge = ({mode, setModal, values}) => {
             })        
     }
 
-    // async function handleSubmit( e ) {
-    //     e.preventDefault();
 
-    //     const token = localStorage.getItem( 'jwt' );
-    //     const formData = new FormData();
+    function handleEdit(e) {
+        e.preventDefault();
         
-    //     for (const key in data) {
-    //         formData.append( key, data[key] )
-    //     }
 
 
-    //     const response = await fetch(`${process.env.REACT_APP_BACKEND_URI}/api/challenges/write`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'authorization': token
-    //         },
-    //         body: formData
-    //     });
+        const token = localStorage.getItem( 'jwt' );
+        const formData = new FormData();
 
-    //     const resData = await response.json();
-
-    //     if ( resData.success ) {
-
-    //         navigate('/challenges');
-    //     } else {
-            
-    //         const errorsArray = Object.values(resData.errors);
-
-    //         const errorsMerged = [].concat.apply([], errorsArray);
-
-    //         console.log(errorsMerged);
-    //     }
-    // }
-
-
-    function handleEdit() {
-
-        const token = localStorage.getItem( 'jwt' ); 
-        const body = JSON.stringify(data);
-
-        console.log(body);
+        for (const key in data) {
+            formData.append( key, data[key] )
+        }
 
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/challenges/update/${values.cid}`, {
                 method: 'PUT',
                 headers: {
-                    'authorization': token
+                    'authorization': token,
                 },
-                body: body
+                body: formData
             }
         )
         .then( (res) => res.json())
         .then( (dt) => {
             if( dt.success ) {
                 setModal(false);
+                console.log('hello');
             }
         })
         .catch( (err) => console.log(err))
@@ -178,7 +148,13 @@ const CreateChallenge = ({mode, setModal, values}) => {
     <>
         <div id="create-offset-layer">
             <div id="create-form-wrapper">
-                <form id="create-form" noValidate onSubmit={(e) => handleSubmit(e)}>
+                <form id="create-form" noValidate onSubmit={(e) => {
+                        if (mode === 'create') {
+                            handleSubmit(e);
+                        } else if (mode === 'edit') {
+                            handleEdit(e);
+                        }
+                    }}>
                     <div className="form-group create-form-group">
                         <label htmlFor="challenge-title-ip">Titel</label>
                         <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" name="title" id="challenge-title-ip" className='form-control' placeholder='Mein Beispieltitel'/>
@@ -215,7 +191,7 @@ const CreateChallenge = ({mode, setModal, values}) => {
                             <button className="start-btn btn btn-primary my-3">
                                 Challenge erstellen!
                             </button> :
-                            <button type="button" className="start-btn btn btn-primary my-3" onClick={() => handleEdit()}>
+                            <button className="start-btn btn btn-primary my-3">
                                 Challenge überschreiben
                             </button>
                         }

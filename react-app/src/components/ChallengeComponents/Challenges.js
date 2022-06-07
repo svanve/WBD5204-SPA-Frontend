@@ -41,7 +41,7 @@ const Challenges = (props) => {
                 const dataArr = Object.values(dt.result);
                 setData(dataArr);
             })
-            .catch(err=> console.log(err, 'FAIL'));
+            .catch(err=> console.log(err));
         
     }, [ sort, filter ] );
 

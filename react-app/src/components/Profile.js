@@ -21,13 +21,13 @@ const Profile = () => {
     }
 
     useEffect( () => {
+        const token = localStorage.getItem( 'jwt' );
+
         // get Users Data
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/user/getProfile`, {
-            // headers: {
-            //     'Content-Type':  'application/json',
-            //     'credentials':   'include',
-            //     'authorization': token
-            // }
+            headers: {
+                'authorization': token
+            }
         })
             .then( (res) => res.json())
             .then( (dt) => {

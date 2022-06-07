@@ -54,7 +54,7 @@ const Card = (props) => {
                                 <span className="delete-span">Löschen</span>
                             </button>
                             
-                            <button className="link-btn--div btn btn-tertiary edit-btn" onClick={() => props.setEdit(props)}>
+                            <button className="link-btn--div btn btn-tertiary edit-btn" onClick={() => {props.setEdit(props)}}>
                                 <i className="far fa-edit me-2"></i>
                                 <span className="edit-span">Bearbeiten</span>
                             </button>
@@ -69,6 +69,7 @@ const Card = (props) => {
                                         navigate('/start');
                                     }
                                 }}>
+
                             <i className="fas fa-bolt me-2"></i>
                             <span className="challenge-cta">Challenge!</span>
                         </div>

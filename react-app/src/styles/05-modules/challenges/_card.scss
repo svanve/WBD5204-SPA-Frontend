@@ -85,9 +85,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-height: inherit;
 }
 
 .poke-view--image {
+    max-height: inherit;
     svg {
         width: 100%;
     }
