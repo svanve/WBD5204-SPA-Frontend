@@ -19,7 +19,6 @@
 
 - [1. Verzeichnis](#1-verzeichnis)
 - [2. Technologien](#2-technologien)
-- [> **Hinweis** Bootstrap habe ich lokal installiert, also als Ordner in den MATERIAL Ordner reingezogen. Ich hoffe, dass geht für den Prüfer, wenn er das selbst irgendwie installieren muss. Sonst kontaktiere mich doch bitte.](#-hinweis-bootstrap-habe-ich-lokal-installiert-also-als-ordner-in-den-material-ordner-reingezogen-ich-hoffe-dass-geht-für-den-prüfer-wenn-er-das-selbst-irgendwie-installieren-muss-sonst-kontaktiere-mich-doch-bitte)
 - [3. Generelles](#3-generelles)
   - [3.1. Backend](#31-backend)
   - [3.2. Frontend](#32-frontend)
