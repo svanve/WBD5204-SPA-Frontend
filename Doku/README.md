@@ -31,7 +31,6 @@
   - [5.5. Pokémons](#55-pokémons)
   - [5.6. PokéShop](#56-pokéshop)
   - [5.7. Mein Profil](#57-mein-profil)
-  - [5.8. HTTP Problem](#58-http-problem)
 - [6. Code-Struktur](#6-code-struktur)
   - [6.1. Controller](#61-controller)
   - [6.2. Model](#62-model)
