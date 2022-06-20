@@ -1,7 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { Context } from '../../helpers/Context';
+
 const CreateChallenge = ({mode, setModal, values}) => {
+
+    const { setScrollToTop } = useContext( Context );
 
     const [ questions, setQuestions ] = useState([]);
     const [ pokemons, setPokemons ] = useState([]);    
@@ -26,40 +30,43 @@ const CreateChallenge = ({mode, setModal, values}) => {
         cWrapper.style.scrollBehavior = 'unset'; 
         cWrapper.scrollTo(0, 0);
         cWrapper.style.scrollBehavior = 'smooth';
-
+        
         const token = localStorage.getItem( 'jwt' ); 
-
+        
         // get all Questions
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/questions/getQuestions`, {
             headers: {
                 'authorization': token
             }
         })
-            .then( (res) => res.json())
-            .then( (dt) => {
-                const q = Object.values(dt.result);
-                setQuestions(q);
-            })
-            .catch( (err) => console.log(err))
-
+        .then( (res) => res.json())
+        .then( (dt) => {
+            const q = Object.values(dt.result);
+            setQuestions(q);
+        })
+        .catch( (err) => console.log(err))
+        
         // get all Pokemons
         fetch( `${process.env.REACT_APP_BACKEND_URI}/api/pokemons/getPokemons`, {
             headers: {
                 'authorization': token
             }
         })
-            .then( (res) => res.json())
-            .then( (dt) => {
-                const p = Object.values(dt.result);
-                setPokemons(p);
-            })
-            .catch( (err) => console.log(err))
+        .then( (res) => res.json())
+        .then( (dt) => {
+            const p = Object.values(dt.result);
+            setPokemons(p);
+        })
+        .catch( (err) => console.log(err))
     }, [])
-
+    
     
     useEffect( () => {
         // getting and setting values of the clicked challenge in order to let user edit them
         if ( mode === 'edit' ) {
+
+            console.log(setScrollToTop);
+            setScrollToTop(true);
 
             if ( pokemons !== undefined && questions !== undefined ) {
                 
@@ -133,13 +140,8 @@ const CreateChallenge = ({mode, setModal, values}) => {
                 body: formData
             }
         )
-        .then( (res) => res.json())
-        .then( (dt) => {
-            if( dt.success ) {
-                setModal(false);
-                console.log('hello');
-            }
-        })
+        .then( (res) => res.json() )
+        .then( () => setModal(false))
         .catch( (err) => console.log(err))
     }
     
