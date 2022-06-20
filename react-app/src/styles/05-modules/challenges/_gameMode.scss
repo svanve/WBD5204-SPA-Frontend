@@ -87,6 +87,10 @@
     justify-content: center;
     font-size: $font-size-headline-small;
     font-weight: 700;
+    
+    span {
+        margin-right: 5px;
+    }
 
     &:last-child {
         color: gold;
