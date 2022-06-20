@@ -198,45 +198,6 @@ Hier sieht der User nur die Meldung "Am Shop wird gerade garbeitet". Geplant ist
 
 Hier sieht der User Daten über sich selbst, die auch auf der Datenbank gespeichert sind wie: Vorname, Nachname, Email, Username und Profilbild.
 
-### 5.8. HTTP Problem
-
-Der volle Funktionsumfang der App ist nicht möglich aufgrund eines Problems in der Kommunikation zwischen PHP Backend und React Frontend.
-
-- #### **Art des Problems**
-  
-  Es scheint, als würde die `OPTIONS`-Request Probleme bereiten, denn nur `PUT` Requests oder Anfragen mit dem HTTP Header `Authorization` haben bis jetzt dieses Problem erzeugt.
-
-  Das Frontend gibt den Statuscode `400 Bad Request` zurück für den `OPTIONS` Request. D.h. sehr wahrscheinlich, der eigentliche Request wurde vom Backend in diesen Fällen noch nicht mal angefasst.
-
-- #### **Eingeschränkte Funktionalität**
-  
-  Aufgrund des beschriebenen Problems konnte ich leider die App nicht entwickeln, wie ich das ursprünglich beabsichtete aus hauptsächlich zwei Gründen:
-
-1) *Einerseits* ist das Weiterreichen einer `$user_id` zwischen Front- und Backend nicht möglich, denn weder `sessionStorage` noch `localStorage` oder die Verwendung von ***JSON Web Token*** funktionieren. So ist es nicht mal möglich, dynamisch userspezifische Daten ans Frontend zu schicken, auch nicht umgekehrt. Logischerweise muss in der Konsequenz auf eine Autorisierung des Users mittels ***JSON Web Token*** verzichtet werden. Somit sind folgende Funktionen, bei denen man eine `$user_id` bräuchte, nicht vollumfänglich möglich:
-
-   - Userspezifische Challenges abrufen (GET)
-   - Challenge updaten (PUT)
-   - Challenge löschen (DELETE)
-   - Challenge erstellen (POST)
-   
-    > **Hinweis** Authorization-Code wurde jeweils in die Fetch-Requests des Frontend sowie in die Controller-Logik des Backends geschrieben und ausgeklammert, um zu zeigen, dass das Konzept trotzdem verstanden wurde.
-
-    > **Workaround** Um trotzdem Daten im Frontend anzeigen zu können, habe ich die `$user_id` jeweils statisch, also "hardcoded", in die entsprechenden sql-queries oder Controller-Logika geschrieben. Der verwendete User auf allen betroffenen Webpages ist der unter Kapitel [Generelles](#3-generelles) aufgeführte `Kamelfluesterer`.
-
-2) *Andererseits* musste ich erheblichen Zeitverlust hinnehmen aufgrund der hartnäckigen, aber vergeblichen, Fehlersuche. Daher konnte ich folgende Ideen nicht umsetzen:
-
-   - **Eigene Pokémons**: Jeder User hat eigene Pokémons. Ein Pokémon in der Tabelle ``pokémons`` hätte also eine ***unique*** ID. **Beispiel**: Jeder User kann ein Pikachu haben, aber niemand genau dasselbe Exemplar wie ein anderer.
-   - **Levelsystem**: Wie schon unter Kapitel [Spiellogik und Challenges](#53-spiellogik-und-challenges) beschrieben, ist bei jeder Challenge ein Pokémon hinterlegt. Dieses würde eigentlich durch erfolgreiches Abwehren des Herausforderers (falsche Antwort des Challengers) gelevelt. Je einfacher die Frage, desto mehr Levelpunkte erhielte das Pokémon.
-   - **Belohnungssystem**: Durch erfolgreiches Herausfordern (richtige Antwort des Challengers) kriegt der Herausforderer eine Belohnung in Form von PokéCoins, dessen Höhe von der Schwierigkeit der Frage abhängt.
-   - **PokéShop**: Mit den verdienten PokéCoins könnte sich der Nutzer Pokébälle kaufen, welche ein zufälliges Pokémon enthalten.
-   - **Ziel 1**: Alle Pokémon von der Edition Rot/Blau/Gelb zu besitzen, also quasi den Pokédex zu vervollständigen.
-   - **Ziel 2**: Alle Pokémon auf höchstem Level zu haben.
-   - **Gewinnprinzip**: Je mehr Challenges man gewinnt, desto mehr PokéCoins hat man. Je mehr PokéCoins, desto mehr Pokémon. Je mehr Pokémon, desto mehr ausgeschriebene Challenges. Je mehr ausgeschriebene Challenges, desto mehr Pokémon haben die Chance auf ein hohes Level.
-
-    >**Hinweis** Natürlich ist der Zeitaufwand dafür ohnehin sehr gross
-
-    >**Workaround** Damit grafisch gesehen mehr Fleisch am Knochen ist, sind gewisse Werte hardcoded wie die Anzahl der Challenges unter "Mein Profil" oder gewisse Challenge Bestandteile wie das Level der Pokemon oder die Belohnung auf einer Challenge.
-
 ---
 
 ## 6. Code-Struktur
