@@ -3,7 +3,6 @@ import React from 'react';
 const DeleteModal = (props) => {
 
     function deleteChallenge(challenge_id) {
-        console.log(challenge_id);
 
         const token = localStorage.getItem( 'jwt' ); 
         
@@ -15,7 +14,7 @@ const DeleteModal = (props) => {
         })
             .then(res => res.json())
             .then(dt => {
-                console.log('SUCCESS');
+                // success message would be here
             })
             .catch(err => console.log(err, 'FAIL'))
     }
