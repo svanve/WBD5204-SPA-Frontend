@@ -80,7 +80,7 @@ Um ein bisschen mit der App rumzuspielen, kannst du den User "Kamelfluesterer" v
 >
 >Passwort: `Sagtiev1!`
 
-> **Hinweis:** Die Login Funktion ist nicht vollumfänglich funktionsfähig. Das Austauschen einer ```$user_id``` zwischen Api und Client ist nicht möglich. Lese mehr dazu in Kapitel [HTTP Problem](#55-http-problem).
+> **Hinweis:** Die Login Funktion ist nicht vollumfänglich funktionsfähig. Das Austauschen einer ```$user_id``` zwischen Api und Client ist nicht möglich.
 
 ---
 
