@@ -49,12 +49,12 @@
 - Datenbank-Server: `MySQL v10.4.24-MariaDB`, `phpMyAdmin v5.1.3`
 - Betriebssystem: `Microsoft Windows 11 Home`
 
-> **Hinweis** Bootstrap habe ich lokal installiert, also als Ordner in den MATERIAL Ordner reingezogen. Ich hoffe, dass geht für den Prüfer, wenn er das selbst irgendwie installieren muss. Sonst kontaktiere mich doch bitte.
+> **Hinweis** Bootstrap habe ich lokal installiert und als Ordner in den MATERIAL Ordner reingezogen.
 ---
 
 ## 3. Generelles
 
-Diese Web Applikation ist eine **Single Page Application** (***SPA***). Das heisst, das Frontend und Backend kommunizieren asynchron, von jeweils einer anderen `Origin` aus und benutzen dazu `HTTP Requests`. Der Webserver übernimmt nicht selbst die Funktion der Präsentation der Webseite, sondern stellt lediglich die benötigten Daten dazu zur Verfügung.
+Diese Web Applikation ist eine **Single Page Application** (***SPA***). Das heisst, das Frontend und Backend kommunizieren asynchron, von jeweils einer anderen `Origin` aus und benutzen dazu `HTTP Requests`. Der Webserver übernimmt nicht selbst die Funktion der Präsentation der Webseite, sondern stellt lediglich die benötigten Daten dazu zur Verfügung (Client Side Rendering).
 
 ### 3.1. Backend
 
