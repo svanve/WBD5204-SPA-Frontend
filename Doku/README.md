@@ -9,7 +9,7 @@
 
 > Autor: Silvan van Veen | Deadline: 05.04.2022 | SAE München 0921
 
-> **Bemerkung** Der Name "PokéCrypt" kommt von meinem Marketingkonzept (WBD5300), wo NFTs ins Spiel integriert wurden. In der eigentlich entwickelten App ist das natürlich nicht der Fall.
+> **Bemerkung** Der Name "PokéCrypt" kommt von meinem Marketingkonzept (WBD5300), wo NFTs ins Spiel integriert wurden. In der effektiv entwickelten App ist das nicht der Fall.
 
 <br>
 
