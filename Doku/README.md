@@ -181,15 +181,13 @@ Das Spielprinzip lässt sich wie folgt beschreiben:
 
 Hier werden alle Pokémons, die es in der Datenbank gibt abgebildet. Der User kann hier Beschriebungen aus dem Nintendo-Spiel zu den einzelnen Pokémon sowie weitere gamespezifische Facts einsehen.
 
-> **Hinweis** Ursprünglich sollten hier eigentlich die Pokémon aufgelistet sein, die der User selbst besitzt und jeweils deren Level eingesehen werden können. Mehr zum Problem unter: [5.8. HTTP Problem](#58-http-problem).
+> **Hinweis** Ursprünglich sollten hier die Pokémon aufgelistet werden, die der User selbst besitzt und jeweils deren Level eingesehen werden können.
 
 ### 5.6. PokéShop
 
 > Durch Drücken auf den Menüpunkt "PokéShop" kommt der User auf die Route `/pokemons`.
 
 Hier sieht der User nur die Meldung "Am Shop wird gerade garbeitet". Geplant ist hier, die Ansicht der Shopartikel, also verschiedene Pokébälle, die gekauft werden können.
-
-> **Hinweis** Der PokéShop gehört ebenfalls in die eigentlich angedachte, aber nicht entwickelte Funktion. Mehr zum Nutzen der angedachten Pokébälle und zum Problem unter: [5.8. HTTP Problem](#58-http-problem).
 
 ### 5.7. Mein Profil
 
@@ -201,7 +199,7 @@ Hier sieht der User Daten über sich selbst, die auch auf der Datenbank gespeich
 
 ## 6. Code-Struktur
 
->Die Architektur der App bedient sich des Model-View-Controller Konzepts.
+> Die Architektur der App bedient sich des Model-View-Controller Konzepts.
 
 Die `api/Api.php` liest die der URL übergebenen Parameter aus und ruft entsprechend den gewünschten Controller und die Methode mit allfälligen, dazugehörenden Argumenten auf.  
 
